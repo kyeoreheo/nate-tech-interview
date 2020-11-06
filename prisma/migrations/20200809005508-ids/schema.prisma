@@ -1,0 +1,28 @@
+datasource db {
+  provider = "postgres"
+  url = "***"
+}
+
+generator prisma_client_js {
+  provider = "prisma-client-js"
+}
+
+model Product {
+  id        String     @id @default(uuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  title     String?
+  image     String?
+  url       String?
+  merchant  String?
+  purchases Purchase[]
+}
+
+model Purchase {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  price     Float
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id])
+}

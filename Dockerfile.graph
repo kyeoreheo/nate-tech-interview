@@ -1,0 +1,15 @@
+FROM node:12.16.1-buster-slim
+
+WORKDIR /app
+
+ADD . /app
+
+RUN apt-get -qy update
+RUN apt-get -qy install openssl
+
+RUN yarn
+RUN yarn build
+
+EXPOSE 4000
+
+ENTRYPOINT ["yarn", "start:graph"]

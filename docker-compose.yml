@@ -1,0 +1,32 @@
+version: "3"
+services:
+  backend-rest:
+    container_name: "product-rest-service"
+    image: nateai/challenge-ios-rest:1.0.0
+    environment:
+      - DATABASE_URL=postgres://productUser:password@postgres:5432/product
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  backend-graph:
+    container_name: "product-graph-service"
+    image: nateai/challenge-ios-graph:1.0.0
+    environment:
+      - DATABASE_URL=postgres://productUser:password@postgres:5432/product
+    ports:
+      - 4000:4000
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: "product-db"
+    image: nateai/challenge-ios-db:1.0.0
+    environment:
+      - POSTGRES_USER=productUser
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=product
+      - PGDATA=/data
+    ports:
+      - 5432:5432

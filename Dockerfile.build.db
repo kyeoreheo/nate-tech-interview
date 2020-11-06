@@ -1,0 +1,16 @@
+FROM node:12.16.1-buster-slim
+
+WORKDIR /app
+
+ADD . /app
+
+RUN chmod 755 /app/entrypoint-build-db.sh
+
+RUN apt-get -qy update
+RUN apt-get -qy install openssl
+
+RUN yarn
+
+EXPOSE 3000
+
+ENTRYPOINT ["/app/entrypoint-build-db.sh"]

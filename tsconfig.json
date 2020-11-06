@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "module": "commonjs",
+    "target": "es2016",
+    "typeRoots": ["node_modules/@types", "types"],
+    "plugins": [{ "name": "nexus/typescript-language-service" }],
+    "esModuleInterop": true,
+    "noEmit": true,
+    "strict": true,
+    "sourceMap": true,
+    "rootDir": "api",
+    "baseUrl": "api",
+    "paths": {
+      "*": ["*"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "include": ["api", "types.d.ts"],
+  "compileOnSave": false
+}
