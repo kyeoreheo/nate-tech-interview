@@ -1,0 +1,6 @@
+framework module Pods_Nate_tech_interview {
+  umbrella header "Pods-Nate tech interview-umbrella.h"
+
+  export *
+  module * { export * }
+}
