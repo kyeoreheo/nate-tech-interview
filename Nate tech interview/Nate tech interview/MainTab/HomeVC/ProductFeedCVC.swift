@@ -65,16 +65,14 @@ extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if franchisees.count > 0 {
-//            return franchisees.count
-//        }
+
         return products.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProductCell
-        if products[indexPath.row].title == "" {
-            cell.titleLabel.text = "Name is missing. We are looking for it!🤓"
+        if products[indexPath.row].title.count <= 0 {
+            cell.titleLabel.text = "Name is missing.\nWe are looking for it!🤓"
         } else {
             cell.titleLabel.text = products[indexPath.row].title
         }
@@ -83,15 +81,15 @@ extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
             cell.imageStringURLs = products[indexPath.row].images
         }
         
-        print("title \(products[indexPath.row].title), images \(products[indexPath.row].images)")
-//        if franchisees.count > 0 {
-//            cell.client = franchisees[indexPath.row]
-//        }
+        if products[indexPath.row].merchant.count <= 0 {
+            cell.popUpMerchantLabel.text = "by UNKNOWN seller 🧐"
+        } else {
+            cell.popUpMerchantLabel.text = "by \(products[indexPath.row].merchant)"
+        }
+        
+        let createdAt = products[indexPath.row].createdAt
+        cell.popUpCreatedDateLabel.text = createdAt.substring(to: 10)
         return cell
     }
 
-    
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        productTapped(index: indexPath.row)
-//    }
 }

@@ -21,6 +21,7 @@ extension API {
         let images: [String]
         let url: String
         let merchant: String
+        let createdAt: String
     }
     
     static func getProducts(completion: @escaping(DataResponse?) -> Void) {
@@ -34,7 +35,7 @@ extension API {
             "DNT": "1"
         ]
         
-        let body = ["query" : "{\n  products {\n    id\n    title\n    images\n    url\n    merchant\n  }\n}"]
+        let body = ["query" : "{\n  products {\n    id\n    title\n    images\n    url\n    merchant\n  createdAt}\n}"]
 
         Alamofire.request(url, method: .get, parameters: body, headers: headers)
         .responseData { response in
