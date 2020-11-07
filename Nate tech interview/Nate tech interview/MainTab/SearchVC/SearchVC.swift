@@ -8,6 +8,8 @@
 import UIKit
 
 class SearchVC: UIViewController {
+    private let viewModel = SearchVM()
+    
     override func viewDidLoad() {
         view.backgroundColor = .red
     }

@@ -8,6 +8,9 @@
 import UIKit
 
 class HomeVC: UIViewController {
+    private let viewModel = HomeVM()
+    
+    
     override func viewDidLoad() {
         view.backgroundColor = .green
     }

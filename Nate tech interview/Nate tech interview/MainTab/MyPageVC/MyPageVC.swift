@@ -8,6 +8,8 @@
 import UIKit
 
 class MyPageVC: UIViewController {
+    private let viewModel = MyPageVM()
+    
     override func viewDidLoad() {
         view.backgroundColor = .orange
     }
