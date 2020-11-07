@@ -25,7 +25,7 @@ class ProductImagePVC: UIPageViewController {
     public let placeHolderImage = UIImageView()
     private var currentIndex = 0 {
         didSet {
-            print("CurrentIndex \(currentIndex)")
+            //print("CurrentIndex \(currentIndex)")
         }
     }
     
@@ -98,7 +98,7 @@ extension ProductImagePVC : UIPageViewControllerDataSource, UIPageViewController
         let nextIndex = index + 1
 
         if nextIndex > pages.count - 1 { return pages.first }
-        print("pageVC \(nextIndex)")
+        //print("pageVC \(nextIndex)")
         currentIndex = index
 
         return pages[nextIndex]

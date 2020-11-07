@@ -13,7 +13,7 @@ extension UIColor {
     static let gray2 = UIColor(hexString: "#D8D8D8")
     static let gray3 = UIColor(hexString: "#C5C5C5")
     static let gray4 = UIColor(hexString: "#B2B2B2")
-    static let lightGray = UIColor(hexString: "#A0A0A0")
+    static let gray5 = UIColor(hexString: "#A0A0A0")
     static let gray6 = UIColor(hexString: "#8E8E8E")
     static let gray7 = UIColor(hexString: "#5D5D5D")
     static let gray8 = UIColor(hexString: "#303030")
