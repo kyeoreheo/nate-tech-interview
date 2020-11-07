@@ -24,6 +24,10 @@
 		31A411682556175D00BC0C02 /* MyPageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A411672556175D00BC0C02 /* MyPageVM.swift */; };
 		31A4116D2556184200BC0C02 /* ProductFeedCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A4116C2556184200BC0C02 /* ProductFeedCVC.swift */; };
 		31A41172255618A300BC0C02 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A41171255618A300BC0C02 /* ProductCell.swift */; };
+		31A41177255629AA00BC0C02 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A41176255629AA00BC0C02 /* UIFont+.swift */; };
+		31A4117F25562A8500BC0C02 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A4117E25562A8500BC0C02 /* Global.swift */; };
+		31A411842556323400BC0C02 /* ProductImagePVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A411832556323400BC0C02 /* ProductImagePVC.swift */; };
+		31A41189255632A600BC0C02 /* ProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A41188255632A600BC0C02 /* ProductImage.swift */; };
 		31A653D62555A4FC006A5A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A653D52555A4FC006A5A19 /* AppDelegate.swift */; };
 		31A653D82555A4FC006A5A19 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A653D72555A4FC006A5A19 /* SceneDelegate.swift */; };
 		31A653DD2555A4FC006A5A19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A653DB2555A4FC006A5A19 /* Main.storyboard */; };
@@ -68,6 +72,10 @@
 		31A411672556175D00BC0C02 /* MyPageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVM.swift; sourceTree = "<group>"; };
 		31A4116C2556184200BC0C02 /* ProductFeedCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFeedCVC.swift; sourceTree = "<group>"; };
 		31A41171255618A300BC0C02 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		31A41176255629AA00BC0C02 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		31A4117E25562A8500BC0C02 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		31A411832556323400BC0C02 /* ProductImagePVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImagePVC.swift; sourceTree = "<group>"; };
+		31A41188255632A600BC0C02 /* ProductImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImage.swift; sourceTree = "<group>"; };
 		31A653D22555A4FC006A5A19 /* Nate tech interview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nate tech interview.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31A653D52555A4FC006A5A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31A653D72555A4FC006A5A19 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +167,8 @@
 				31A4111E2555DF9E00BC0C02 /* UIColor+.swift */,
 				31A411232555DFD300BC0C02 /* UIViewController+.swift */,
 				31A4113D2555E1C900BC0C02 /* UIImage+.swift */,
+				31A41176255629AA00BC0C02 /* UIFont+.swift */,
+				31A4117E25562A8500BC0C02 /* Global.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -170,6 +180,8 @@
 				31A411302555E05600BC0C02 /* HomeVC.swift */,
 				31A4116C2556184200BC0C02 /* ProductFeedCVC.swift */,
 				31A41171255618A300BC0C02 /* ProductCell.swift */,
+				31A411832556323400BC0C02 /* ProductImagePVC.swift */,
+				31A41188255632A600BC0C02 /* ProductImage.swift */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
@@ -436,13 +448,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				31A4114F2555E7B600BC0C02 /* API+Products.swift in Sources */,
+				31A41189255632A600BC0C02 /* ProductImage.swift in Sources */,
 				31A411242555DFD300BC0C02 /* UIViewController+.swift in Sources */,
+				31A41177255629AA00BC0C02 /* UIFont+.swift in Sources */,
 				31A4113E2555E1C900BC0C02 /* UIImage+.swift in Sources */,
 				31A411162555DEBD00BC0C02 /* MainTabBarVM.swift in Sources */,
 				31A4110E2555DEAD00BC0C02 /* MainTabBar.swift in Sources */,
 				31A411312555E05600BC0C02 /* HomeVC.swift in Sources */,
 				31A411632556173B00BC0C02 /* SearchVM.swift in Sources */,
+				31A4117F25562A8500BC0C02 /* Global.swift in Sources */,
 				31A410EA2555A95E00BC0C02 /* SplashVC.swift in Sources */,
+				31A411842556323400BC0C02 /* ProductImagePVC.swift in Sources */,
 				31A653D62555A4FC006A5A19 /* AppDelegate.swift in Sources */,
 				31A411392555E05E00BC0C02 /* SearchVC.swift in Sources */,
 				31A4115B2556170800BC0C02 /* HomeVM.swift in Sources */,
@@ -632,6 +648,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDBB8774WP;
 				INFOPLIST_FILE = "$(SRCROOT)/Nate tech interview/Application/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -652,6 +669,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDBB8774WP;
 				INFOPLIST_FILE = "$(SRCROOT)/Nate tech interview/Application/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
