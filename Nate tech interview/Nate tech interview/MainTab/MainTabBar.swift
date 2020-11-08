@@ -8,9 +8,10 @@
 import UIKit
 
 class MainTabBar: UITabBarController, UITabBarControllerDelegate {
-    // MARK: - Lifecycle
+    // MARK:- Properties
     private let viewModel = MainTabVM()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.delegate = self
@@ -22,8 +23,8 @@ class MainTabBar: UITabBarController, UITabBarControllerDelegate {
         self.selectedIndex = 0
     }
     
-    // MARK: - configures
-    func configureTabBar() {
+    // MARK: - Configures
+    private func configureTabBar() {
         tabBar.barTintColor = .white
         tabBar.tintColor = .orange
 

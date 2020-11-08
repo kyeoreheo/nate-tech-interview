@@ -9,28 +9,24 @@ import UIKit
 import SnapKit
 
 class HomeVC: UIViewController {
+    // MARK:- Properties
     private lazy var viewModel = HomeVM(self)
     private let productFeedCVC = ProductFeedCVC()
-    
     var products = [API.ProductResponse]() {
         didSet {
-            productFeedCVC.setProduct(products)
+            productFeedCVC.products = products
         }
     }
-
+    
+    // MARK:- Lifecycle
     override func viewDidLoad() {
-        configureView()
         configureUI()
         viewModel.getProducts()
-//        getProducts()
     }
     
-    private func configureView() {
-        view.backgroundColor = .white
-//        productFeedCVC.delegate = self
-    }
-    
+    // MARK:- Configures
     private func configureUI() {
+        view.backgroundColor = .white
         view.addSubview(productFeedCVC.view)
         productFeedCVC.view.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)

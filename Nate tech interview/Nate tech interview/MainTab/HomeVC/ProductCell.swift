@@ -8,22 +8,21 @@
 import UIKit
 
 class ProductCell: UICollectionViewCell {
-    // MARK:- Properties
-    private lazy var viewModel = HomeVM(self)
+    // MARK:- ViewComponents
+    public lazy var productImagePVC = ProductImagePVC()
     public let titleLabel = UILabel()
-    public var imageStringURLs = [String]() {
-        didSet {
-            viewModel.showPVC()
-        }
-    }
+    public let popUpMerchantLabel = UILabel()
+    public let popUpCreatedDateLabel = UILabel()
+    public let popUpWebsiteButton = UIButton()
     private let detailButton = UIButton()
-    lazy var productImagePVC = ProductImagePVC()
-    
     private let visualEffectView = UIVisualEffectView()
     private let popUpFrame = UIView()
     private let popUpTitleLabel = UILabel()
-    public let popUpMerchantLabel = UILabel()
-    public let popUpCreatedDateLabel = UILabel()
+    
+    // MARK:- Properties
+    public lazy var viewModel = HomeVM(self)
+    public var imageStringURLs = [String]()
+    public var webSiteURL = ""
     private var isDetailOn = false
 
     // MARK:- Lifecycle
@@ -124,12 +123,24 @@ class ProductCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(-8)
             make.bottom.equalToSuperview().offset(-8)
         }
+        
+        popUpFrame.addSubview(popUpWebsiteButton)
+        popUpWebsiteButton.setTitle("visit website", for: .normal)
+        popUpWebsiteButton.titleLabel?.font = .notoReg(size: 18 * ratio)
+        popUpWebsiteButton.setTitleColor(.gray5, for: .normal)
+        popUpWebsiteButton.addTarget(self, action: #selector(openWebsite), for: .touchUpInside)
+        popUpWebsiteButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(8)
+            make.centerY.equalTo(popUpCreatedDateLabel.snp.centerY)
+        }
     }
     
     override func prepareForReuse() {
         visualEffectView.alpha = 0
         popUpFrame.alpha = 0
         isDetailOn = false
+        productImagePVC.placeHolderImage.isHidden = true
+        popUpWebsiteButton.isHidden = false
         if productImagePVC.imageStringURLs.count > 0 {
             productImagePVC.setViewControllers([productImagePVC.pages[0]], direction: .forward, animated: false)
             productImagePVC.pageControl.currentPage = 0
@@ -154,5 +165,10 @@ class ProductCell: UICollectionViewCell {
                 self.popUpFrame.transform = CGAffineTransform.identity
             }
         }
+    }
+    
+    @objc func openWebsite() {
+        guard let url = URL(string: webSiteURL) else { return }
+        UIApplication.shared.open(url)
     }
 }
