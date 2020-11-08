@@ -9,10 +9,11 @@ import UIKit
 import SDWebImage
 
 class ProductImage: UIViewController  {
+    // MARK:- ViewComponents
+    var imageView =  UIImageView()
+    
     // MARK:- Properties
     private var imageURL: URL?
-    
-    var imageView =  UIImageView()
     
     // MARK:- Lifecycle
     convenience init(urlString: String) {
@@ -24,7 +25,6 @@ class ProductImage: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        setBannerImage()
     }
     
     // MARK:- Configures
@@ -36,16 +36,5 @@ class ProductImage: UIViewController  {
         imageView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }
-        
-    }
-    
-    public func setBannerImage() {
-       
-    }
-    
-    // MARK:- Selectors
-    @objc
-    private func openPromotion(_: UITapGestureRecognizer) {
-        print("DEBUG:- touched!!")
     }
 }

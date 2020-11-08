@@ -8,7 +8,7 @@
 import UIKit
 
 class SplashVC: UIViewController {
-    //MARK:- Porperties
+    //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         applyBackground()
