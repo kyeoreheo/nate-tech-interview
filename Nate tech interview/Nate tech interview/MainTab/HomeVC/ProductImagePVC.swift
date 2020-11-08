@@ -7,29 +7,18 @@
 
 import UIKit
 
-struct PartnerBannerResponse {
-    var urlString = ""
-}
-
 class ProductImagePVC: UIPageViewController {
     // MARK:- Properties
+    private lazy var viewModel = HomeVM(self)
     var imageStringURLs = [String]() {
         didSet {
-            generatePages()
+            viewModel.generatePages()
         }
     }
-
-    public var hi = ""
-    private var pages = [UIViewController]()
-    private let pageControl = UIPageControl()
+    var pages = [UIViewController]()
+    let pageControl = UIPageControl()
     public let placeHolderImage = UIImageView()
-    private var currentIndex = 0 {
-        didSet {
-            //print("CurrentIndex \(currentIndex)")
-        }
-    }
     
-
     // MARK:- Lifecycle
     init() {
         super.init(transitionStyle: .scroll,
@@ -40,13 +29,14 @@ class ProductImagePVC: UIPageViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         configureUI()
     }
-    // MARK:- Configures
     
+    // MARK:- Configures
     private func configureView() {
         view.backgroundColor = .clear
         self.delegate = self
@@ -70,13 +60,6 @@ class ProductImagePVC: UIPageViewController {
             make.top.left.bottom.right.equalToSuperview()
         }
     }
-
-    // MARK:- Helpers
-    private func generatePages() {
-        pages = imageStringURLs.compactMap{ ProductImage(urlString: $0) }
-        setViewControllers([pages[0]], direction: .forward, animated: false)
-        pageControl.numberOfPages = pages.count
-    }
 }
 
 // MARK:- Extension
@@ -87,8 +70,6 @@ extension ProductImagePVC : UIPageViewControllerDataSource, UIPageViewController
         else { return nil }
         let prevIndex = index - 1
         if prevIndex < 0 { return pages.last }
-        currentIndex = index
-
         return pages[prevIndex]
     }
 
@@ -96,11 +77,7 @@ extension ProductImagePVC : UIPageViewControllerDataSource, UIPageViewController
         guard let index = pages.firstIndex(of: viewController)
         else { return nil }
         let nextIndex = index + 1
-
         if nextIndex > pages.count - 1 { return pages.first }
-        //print("pageVC \(nextIndex)")
-        currentIndex = index
-
         return pages[nextIndex]
     }
     

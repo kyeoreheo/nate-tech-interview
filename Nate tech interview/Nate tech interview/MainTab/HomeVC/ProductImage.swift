@@ -11,7 +11,6 @@ import SDWebImage
 class ProductImage: UIViewController  {
     // MARK:- Properties
     private var imageURL: URL?
-    
     var imageView =  UIImageView()
     
     // MARK:- Lifecycle
@@ -24,7 +23,6 @@ class ProductImage: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        setBannerImage()
     }
     
     // MARK:- Configures
@@ -36,11 +34,6 @@ class ProductImage: UIViewController  {
         imageView.snp.makeConstraints { make in
             make.top.left.bottom.right.equalToSuperview()
         }
-        
-    }
-    
-    public func setBannerImage() {
-       
     }
     
     // MARK:- Selectors

@@ -13,13 +13,13 @@ class MainTabBar: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.delegate = self
         configureTabBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.selectedIndex = 0
-        tabBarController?.delegate = self
     }
     
     // MARK: - configures
@@ -33,9 +33,4 @@ class MainTabBar: UITabBarController, UITabBarControllerDelegate {
         
         viewControllers = [homeTab, searchTab, myPageTab]
     }
-
-    // MARK:- Helper
-
-    // MARK:- Selector
-
 }

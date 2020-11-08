@@ -9,10 +9,15 @@ import UIKit
 
 class ProductCell: UICollectionViewCell {
     // MARK:- Properties
+    private lazy var viewModel = HomeVM(self)
     public let titleLabel = UILabel()
-    public var imageStringURLs = [String]() { didSet { showPVC() } }
+    public var imageStringURLs = [String]() {
+        didSet {
+            viewModel.showPVC()
+        }
+    }
     private let detailButton = UIButton()
-    private lazy var productImagePVC = ProductImagePVC()
+    lazy var productImagePVC = ProductImagePVC()
     
     private let visualEffectView = UIVisualEffectView()
     private let popUpFrame = UIView()
@@ -125,6 +130,10 @@ class ProductCell: UICollectionViewCell {
         visualEffectView.alpha = 0
         popUpFrame.alpha = 0
         isDetailOn = false
+        if productImagePVC.imageStringURLs.count > 0 {
+            productImagePVC.setViewControllers([productImagePVC.pages[0]], direction: .forward, animated: false)
+            productImagePVC.pageControl.currentPage = 0
+        }
     }
     
     @objc func displayDetail() {
@@ -146,39 +155,4 @@ class ProductCell: UICollectionViewCell {
             }
         }
     }
-    
-    private func showPVC() {
-        let filteredURLs = imageStringURLs.filter{ isValidUrl(urlString: $0) }
-        if filteredURLs.count > 0 {
-            productImagePVC.imageStringURLs = filteredURLs
-            productImagePVC.placeHolderImage.isHidden = true
-        } else {
-            productImagePVC.placeHolderImage.isHidden = false
-        }
-        
-        if filteredURLs.count <= 1 {
-            productImagePVC.view.subviews.forEach {
-                if let scrollView = $0 as? UIScrollView {
-                    scrollView.isScrollEnabled = false
-                }
-            }
-        } else {
-            productImagePVC.view.subviews.forEach {
-                if let scrollView = $0 as? UIScrollView {
-                    scrollView.isScrollEnabled = true
-                }
-            }
-        }
-    }
-    
-    func isValidUrl (urlString: String?) -> Bool {
-        if let urlString = urlString {
-            if let url = URL(string: urlString) {
-                return UIApplication.shared.canOpenURL(url)
-            }
-        }
-        return false
-    }
-
-    // MARK:- Extentions
 }
