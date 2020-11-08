@@ -236,8 +236,8 @@
 		31A4111D2555DEFA00BC0C02 /* MyPageVC */ = {
 			isa = PBXGroup;
 			children = (
-				31A4112B2555E04800BC0C02 /* MyPageVC.swift */,
 				31A411672556175D00BC0C02 /* MyPageVM.swift */,
+				31A4112B2555E04800BC0C02 /* MyPageVC.swift */,
 			);
 			path = MyPageVC;
 			sourceTree = "<group>";

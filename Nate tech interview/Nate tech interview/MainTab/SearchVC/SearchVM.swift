@@ -6,6 +6,9 @@
 //
 
 import UIKit
+
 class SearchVM {
+    
+    
     
 }
