@@ -30,6 +30,19 @@ enum DeliveryStatus: Int {
     case refunded
 }
 
+struct Address {
+    var street: String
+    var city: String
+    var state: String
+    var zipcode: String
+}
+
+struct Card {
+    var number: String
+    var cvv: String
+}
+
+
 func removeDuplicates(_ array: [String]) -> [String] {
     var result = [String]()
     var temp = [String]()

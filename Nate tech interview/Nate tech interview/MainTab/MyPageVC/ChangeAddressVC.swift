@@ -7,13 +7,6 @@
 
 import UIKit
 
-struct Address {
-    var street: String
-    var city: String
-    var state: String
-    var zipcode: String
-}
-
 class ChangeAddresssVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
@@ -166,6 +159,7 @@ class ChangeAddresssVC: UIViewController {
     }
     
     @objc func applyChanges() {
+        User.shared.setAddress(address)
         popVC()
     }
 }

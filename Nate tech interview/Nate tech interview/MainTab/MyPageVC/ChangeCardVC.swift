@@ -124,6 +124,7 @@ class ChangeCardVC: UIViewController {
     }
     
     @objc func applyChanges() {
+        User.shared.setCard(Card(number: cardNumber, cvv: cvv))
         popVC()
     }
 }

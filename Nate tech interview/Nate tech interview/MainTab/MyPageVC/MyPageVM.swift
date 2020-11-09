@@ -243,5 +243,21 @@ class MyPageVM {
 
         return view
     }
+    
+    func fetchUser() {
+        guard let vc = viewController as? MyPageVC,
+              let username = vc.usernameInfoField.viewWithTag(1) as? UILabel,
+              let email = vc.emailInfoField.viewWithTag(1) as? UILabel,
+              let address = vc.addressInfoField.viewWithTag(1) as? UILabel,
+              let card = vc.cardInfoField.viewWithTag(1) as? UILabel,
+              let phone = vc.phoneInfoField.viewWithTag(1) as? UILabel
+        else { return }
+        
+        username.text = User.shared.name
+        email.text = User.shared.email
+        address.text = User.shared.addresToString()
+        card.text = User.shared.card.number
+        phone.text = User.shared.phone
+    }
    
 }
