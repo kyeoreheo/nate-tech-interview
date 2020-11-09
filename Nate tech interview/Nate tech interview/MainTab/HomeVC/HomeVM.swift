@@ -15,35 +15,33 @@ class HomeVM {
     }
     
     func getProducts() {
-        API.getProducts() { [weak self] response in
-            guard let strongSelf = self,
-                  let data = response?.data,
-                  let vc = strongSelf.viewController as? HomeVC
-            else { return }
+        guard let vc = viewController as? HomeVC else { return }
+        API.getProducts() { response in
+            guard let data = response?.data else { return }
             vc.products = data.products
         }
     }
     
-    func filterValues(title: String, imageStringURLs: [String], merchant: String, createdAt: String, websiteURL: String) {
-        guard let vc = viewController as? ProductCell
+    func filterValues(productName: String, imageStringURLs: [String], merchant: String, createdAt: String, websiteURL: String) {
+        guard let cell = viewController as? ProductCell
         else { return }
         
-        if title.count > 0 {
-            vc.titleLabel.text = title
+        if productName.count > 0 {
+            cell.productName.text = productName
         } else {
-            vc.titleLabel.text = "Name is missing.\nWe are looking for it!🤓"
+            cell.productName.text = "Name is missing.\nWe are looking for it!🤓"
         }
         
         if merchant.count > 0 {
-            vc.popUpMerchantLabel.text = "by \(merchant)"
+            cell.popUpMerchantLabel.text = "by \(merchant)"
         } else {
-            vc.popUpMerchantLabel.text = "by UNKNOWN seller 🧐"
+            cell.popUpMerchantLabel.text = "by UNKNOWN seller 🧐"
         }
         
-        vc.popUpCreatedDateLabel.text = createdAt.substring(to: 10)
+        cell.popUpCreatedDateLabel.text = createdAt.substring(to: 10)
         
         if !isValidUrl(urlString: websiteURL) {
-            vc.popUpWebsiteButton.isHidden = true
+            cell.popUpWebsiteButton.isHidden = true
         }
         
         let filteredURLs = imageStringURLs.filter {
@@ -51,34 +49,26 @@ class HomeVM {
         }
         
         if filteredURLs.count > 0 {
-            vc.productImagePVC.imageStringURLs = removeDuplicates(filteredURLs)
+            cell.productImagePVC.imageStringURLs = removeDuplicates(filteredURLs)
         } else {
-            vc.productImagePVC.placeHolderImage.isHidden = false
+            cell.productImagePVC.placeHolderImage.isHidden = false
         }
         
         if filteredURLs.count <= 1 {
-            vc.productImagePVC.view.subviews.forEach {
+            cell.productImagePVC.view.subviews.forEach {
                 if let scrollView = $0 as? UIScrollView {
                     scrollView.isScrollEnabled = false
                 }
             }
         } else {
-            vc.productImagePVC.view.subviews.forEach {
+            cell.productImagePVC.view.subviews.forEach {
                 if let scrollView = $0 as? UIScrollView {
                     scrollView.isScrollEnabled = true
                 }
             }
         }
         
-        vc.webSiteURL = websiteURL
-    }
-    
-    func isValidUrl (urlString: String?) -> Bool {
-        guard let urlString = urlString,
-              let url = URL(string: urlString)
-        else { return false }
-        
-        return UIApplication.shared.canOpenURL(url)
+        cell.webSiteURL = websiteURL
     }
     
     func generatePages() {
@@ -90,21 +80,5 @@ class HomeVM {
         }
         vc.setViewControllers([vc.pages[0]], direction: .forward, animated: false)
         vc.pageControl.numberOfPages = vc.pages.count
-    }
-    
-    func removeDuplicates(_ array: [String]) -> [String] {
-        var result = [String]()
-        var temp = [String]()
-
-        for element in array {
-            let url = element.replacingOccurrences(of: "http://", with: "")
-                      .replacingOccurrences(of: "https://", with: "")
-            if temp.contains(url) == false {
-                result.append(element)
-                temp.append(url)
-            }
-        }
-
-        return result
     }
 }

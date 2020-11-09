@@ -1,21 +1,22 @@
 //
-//  ProductFeedCVC.swift
+//  OrderHistoryCVC.swift
 //  Nate tech interview
 //
-//  Created by Kyo on 11/6/20.
+//  Created by Kyo on 11/9/20.
 //
 
 import UIKit
 
-class ProductFeedCVC: UICollectionViewController {
+class OrderHistoryCVC: UICollectionViewController {
     // MARK:- Properties
-    weak var delegate: ProductCellDelegate?
+    public lazy var viewModel  = OrderVM(self)
+//    weak var delegate: ProductCellDelegate?
     public var products = [API.ProductResponse]() {
         didSet {
             collectionView.reloadData()
         }
     }
-    private let reuseIdentifier = "productCell"
+    private let reuseIdentifier = "orderHistoryCell"
     
     // MARK:- Lifecycle
     override init(collectionViewLayout layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
@@ -40,15 +41,15 @@ class ProductFeedCVC: UICollectionViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        collectionView.register(ProductCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(OrderHistoryCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
 }
 
 // MARK:- Extentions
-extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
+extension OrderHistoryCVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: view.frame.width)
+        return CGSize(width: view.frame.width, height: view.frame.width / 2)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -57,7 +58,7 @@ extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProductCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! OrderHistoryCell
         
         let currentItem = products[indexPath.row]
         cell.viewModel.filterValues(productName: currentItem.title,
@@ -65,7 +66,7 @@ extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
              merchant: currentItem.merchant,
              createdAt: currentItem.createdAt,
              websiteURL: currentItem.url)
-        cell.delegate = delegate
+//        cell.delegate = delegate
 
         return cell
     }

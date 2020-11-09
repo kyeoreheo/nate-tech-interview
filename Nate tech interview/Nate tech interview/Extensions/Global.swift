@@ -20,3 +20,36 @@ enum TextFieldType {
     case password
     case email
 }
+
+enum DeliveryStatus {
+    case orderReceived
+    case shipped
+    case delivered
+    case pending
+    case missing
+    case refunded
+}
+
+func removeDuplicates(_ array: [String]) -> [String] {
+    var result = [String]()
+    var temp = [String]()
+
+    for element in array {
+        let url = element.replacingOccurrences(of: "http://", with: "")
+                  .replacingOccurrences(of: "https://", with: "")
+        if temp.contains(url) == false {
+            result.append(element)
+            temp.append(url)
+        }
+    }
+
+    return result
+}
+
+func isValidUrl (urlString: String?) -> Bool {
+    guard let urlString = urlString,
+          let url = URL(string: urlString)
+    else { return false }
+    
+    return UIApplication.shared.canOpenURL(url)
+}

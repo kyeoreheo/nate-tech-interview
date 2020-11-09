@@ -14,14 +14,14 @@ protocol ProductCellDelegate: class {
 class ProductCell: UICollectionViewCell {
     // MARK:- ViewComponents
     public lazy var productImagePVC = ProductImagePVC()
-    public let titleLabel = UILabel()
+    public let productName = UILabel()
     public let popUpMerchantLabel = UILabel()
     public let popUpCreatedDateLabel = UILabel()
     public let popUpWebsiteButton = UIButton()
     private let detailButton = UIButton()
     private let visualEffectView = UIVisualEffectView()
     private let popUpFrame = UIView()
-    private let popUpTitleLabel = UILabel()
+    private let popUpProductName = UILabel()
     private let purchaseButton = UIButton()
     
     // MARK:- Properties
@@ -65,11 +65,11 @@ class ProductCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(-24)
         }
         
-        addSubview(titleLabel)
-        titleLabel.font = UIFont.notoReg(size: 24 * ratio)
-        titleLabel.numberOfLines = 2
-        titleLabel.textColor = .black
-        titleLabel.snp.makeConstraints { make in
+        addSubview(productName)
+        productName.font = UIFont.notoReg(size: 24 * ratio)
+        productName.numberOfLines = 2
+        productName.textColor = .black
+        productName.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview().offset(24)
             make.right.equalTo(detailButton.snp.left)
@@ -77,7 +77,7 @@ class ProductCell: UICollectionViewCell {
         
         addSubview(productImagePVC.view)
         productImagePVC.view.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.top.equalTo(productName.snp.bottom).offset(8)
             make.height.equalTo(frame.width * 0.8)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -101,11 +101,11 @@ class ProductCell: UICollectionViewCell {
             make.bottom.equalToSuperview().offset(-24)
         }
         
-        popUpFrame.addSubview(popUpTitleLabel)
-        popUpTitleLabel.numberOfLines = 0
-        popUpTitleLabel.textColor = .gray8
-        popUpTitleLabel.font = .notoReg(size: 24 * ratio)
-        popUpTitleLabel.snp.makeConstraints { make in
+        popUpFrame.addSubview(popUpProductName)
+        popUpProductName.numberOfLines = 0
+        popUpProductName.textColor = .gray8
+        popUpProductName.font = .notoReg(size: 24 * ratio)
+        popUpProductName.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)
             make.left.equalToSuperview().offset(8)
             make.right.equalToSuperview().offset(-8)
@@ -117,7 +117,7 @@ class ProductCell: UICollectionViewCell {
         popUpMerchantLabel.textColor = .gray7
         popUpMerchantLabel.font = .notoBold(size: 24 * ratio)
         popUpMerchantLabel.snp.makeConstraints { make in
-            make.top.equalTo(popUpTitleLabel.snp.bottom).offset(12)
+            make.top.equalTo(popUpProductName.snp.bottom).offset(12)
             make.right.equalToSuperview().offset(-8)
             make.left.equalToSuperview().offset(8)
         }
@@ -163,7 +163,7 @@ class ProductCell: UICollectionViewCell {
     }
     
     @objc func displayDetail() {
-        popUpTitleLabel.text = titleLabel.text
+        popUpProductName.text = productName.text
         if isDetailOn {
             isDetailOn = false
             UIView.animate(withDuration: 0.5) {
