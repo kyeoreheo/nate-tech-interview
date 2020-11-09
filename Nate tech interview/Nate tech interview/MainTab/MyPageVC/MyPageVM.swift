@@ -79,4 +79,105 @@ class MyPageVM {
 
         return view
     }
+    
+    func generalButton(isActive: Bool, text: String = "Confirm", buttonColor: UIColor = .orange, textColor: UIColor = .white, target: Any, action: Selector) -> UIButton {
+        let button = UIButton(type: .system)
+
+        button.backgroundColor = isActive ? buttonColor : .white
+        button.setTitleColor(isActive ? textColor : .gray5, for: .normal)
+        button.layer.borderColor = UIColor.gray2.cgColor
+        button.layer.borderWidth = isActive ? 0 : 2
+        button.layer.cornerRadius = 5
+        button.setTitle(text, for:.normal)
+        button.titleLabel?.font = UIFont.notoBold(size: 14 * ratio)
+        button.addGestureRecognizer(UITapGestureRecognizer(target: target, action: action))
+        button.isEnabled = isActive
+
+        return button
+    }
+    
+    func textField(placeHolder: String, target: Any, action: Selector, type: TextFieldType, isSmall: Bool = false) -> UIView {
+        let view = UIView()
+        let textField = UITextField()
+        let divider = UIImageView()
+        
+        view.addSubview(textField)
+        textField.tag = 1
+        textField.textColor = .gray8
+        if isSmall {
+            textField.font = UIFont.notoReg(size: 16 * ratio)
+            textField.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray6, NSAttributedString.Key.font: UIFont.notoReg(size: 16 * ratio)])
+        } else {
+            textField.font = UIFont.notoBold(size: 24 * ratio)
+            textField.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray6, NSAttributedString.Key.font: UIFont.notoBold(size: 24 * ratio)])
+        }
+        textField.delegate = target as? UITextFieldDelegate
+        textField.addTarget(target, action: action, for: .editingChanged)
+        textField.autocorrectionType = .no
+        
+        switch type {
+        case .phone, .card:
+            textField.keyboardType = .numberPad
+        case .email:
+            textField.keyboardType = .emailAddress
+        case .password:
+            textField.keyboardType = .default
+            textField.isSecureTextEntry = true
+        case .address:
+            textField.keyboardType = .default
+        }
+
+        textField.snp.makeConstraints { make in
+            make.height.equalTo(36)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+        
+        view.addSubview(divider)
+        divider.contentMode = .scaleAspectFit
+        divider.clipsToBounds = true
+        divider.isUserInteractionEnabled = true
+        divider.backgroundColor = .gray5
+        divider.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.top.equalTo(textField.snp.bottom).offset(8)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+
+        return view
+    }
+    
+    func checkAddressFormat() {
+        guard let vc = viewController as? ChangeAddresssVC
+        else { return }
+        if vc.address.street != "" && vc.address.city != "" && vc.address.state.count >= 2 && vc.address.zipcode.count >= 5 {
+            vc.confirmButton.backgroundColor = .orange
+            vc.confirmButton.setTitleColor(.white, for: .normal)
+            vc.confirmButton.layer.borderWidth = 0
+            vc.confirmButton.isEnabled = true
+        } else {
+            vc.confirmButton.backgroundColor = .white
+            vc.confirmButton.setTitleColor(.gray5, for: .normal)
+            vc.confirmButton.layer.borderWidth = 2
+            vc.confirmButton.isEnabled = false
+        }
+    }
+    
+    func checkCardFormat() {
+        guard let vc = viewController as? ChangeCardVC
+        else { return }
+        if (vc.cardNumber.count == 19) && (vc.cvv.count == 3) {
+            vc.confirmButton.backgroundColor = .orange
+            vc.confirmButton.setTitleColor(.white, for: .normal)
+            vc.confirmButton.layer.borderWidth = 0
+            vc.confirmButton.isEnabled = true
+        } else {
+            vc.confirmButton.backgroundColor = .white
+            vc.confirmButton.setTitleColor(.gray5, for: .normal)
+            vc.confirmButton.layer.borderWidth = 2
+            vc.confirmButton.isEnabled = false
+        }
+    }
 }

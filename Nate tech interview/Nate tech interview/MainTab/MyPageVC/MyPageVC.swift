@@ -20,7 +20,7 @@ class MyPageVC: UIViewController {
                      action: #selector(changeAddress), target: self)
     private lazy var cardInfoField = viewModel.informationField(
                      labelText: "card", textFieldText: "**** - **** - **** - 1234",
-                     action: #selector(changeAddress), target: self)
+                     action: #selector(changeCreditCard), target: self)
     private lazy var phoneInfoField = viewModel.informationField(
                      labelText: "phone", textFieldText: "+1 917-123-1234",
                      action: #selector(changePhone), target: self)
@@ -125,15 +125,15 @@ class MyPageVC: UIViewController {
     }
     
     @objc func changePhone() {
-        
     }
     
     @objc func changeAddress() {
-        
+        pushVC(ChangeAddresssVC())
     }
     
     @objc func changeCreditCard() {
-        
+        pushVC(ChangeCardVC())
+
     }
 
 }
