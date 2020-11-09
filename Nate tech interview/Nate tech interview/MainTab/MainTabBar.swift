@@ -29,9 +29,9 @@ class MainTabBar: UITabBarController, UITabBarControllerDelegate {
         tabBar.tintColor = .orange
 
         let homeTab = viewModel.barTabView(view: HomeVC(), image: "home")
-        let searchTab = viewModel.barTabView(view: SearchVC(), image: "search")
+        let orderTab = viewModel.barTabView(view: OrderVC(), image: "order")
         let myPageTab = viewModel.barTabView(view: MyPageVC(), image: "setting")
         
-        viewControllers = [homeTab, searchTab, myPageTab]
+        viewControllers = [homeTab, orderTab, myPageTab]
     }
 }

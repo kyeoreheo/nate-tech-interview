@@ -24,11 +24,16 @@ class HomeVC: UIViewController {
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
+        configure()
         configureUI()
-        viewModel.getProducts()
     }
     
     // MARK:- Configures
+    private func configure() {
+        view.backgroundColor = .white
+        viewModel.getProducts()
+    }
+    
     private func configureUI() {
         view.addSubview(titleLabel)
         titleLabel.text = "Trand Items"
@@ -39,7 +44,6 @@ class HomeVC: UIViewController {
             make.left.equalToSuperview().offset(24)
         }
         
-        view.backgroundColor = .white
         view.addSubview(productFeedCVC.view)
         productFeedCVC.delegate = self
         productFeedCVC.view.snp.makeConstraints { make in
