@@ -9,6 +9,7 @@ import UIKit
 
 class ProductFeedCVC: UICollectionViewController {
     // MARK:- Properties
+    weak var delegate: ProductCellDelegate?
     public var products = [API.ProductResponse]() {
         didSet {
             collectionView.reloadData()
@@ -46,11 +47,12 @@ class ProductFeedCVC: UICollectionViewController {
 // MARK:- Extentions
 extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: view.frame.width, height: view.frame.width)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         return products.count
     }
     
@@ -63,6 +65,7 @@ extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
              merchant: currentItem.merchant,
              createdAt: currentItem.createdAt,
              websiteURL: currentItem.url)
+        cell.delegate = delegate
 
         return cell
     }

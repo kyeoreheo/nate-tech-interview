@@ -180,4 +180,68 @@ class MyPageVM {
             vc.confirmButton.isEnabled = false
         }
     }
+    
+    func checkPhoneNumberFormat() {
+        guard let vc = viewController as? ChangePhoneVC
+        else { return }
+        
+        if vc.phoneNumber.count == 12 {
+            vc.confirmButton.backgroundColor = .orange
+            vc.confirmButton.setTitleColor(.white, for: .normal)
+            vc.confirmButton.layer.borderWidth = 0
+            vc.confirmButton.isEnabled = true
+        } else {
+            vc.confirmButton.backgroundColor = .white
+            vc.confirmButton.setTitleColor(.gray5, for: .normal)
+            vc.confirmButton.layer.borderWidth = 2
+            vc.confirmButton.isEnabled = false
+        }
+    }
+    
+    func notificationView(text: String = "You will recieve delivery status") -> UIView {
+        let view = UIView()
+        let frame = UIImageView()
+        let checkMark = UIImageView()
+        let cover = UIImageView()
+        let label = UILabel()
+        
+        view.backgroundColor = .clear
+        
+        view.addSubview(frame)
+        frame.layer.cornerRadius = 8
+        frame.backgroundColor = .green
+        frame.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview()
+        }
+        
+        view.addSubview(cover)
+        
+        view.addSubview(checkMark)
+        checkMark.image = UIImage(named: "oval-check-green")
+        checkMark.snp.makeConstraints { make in
+            make.width.height.equalTo(24 * ratio)
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(16)
+        }
+
+        cover.backgroundColor = .white
+        cover.layer.cornerRadius = 24 * ratio * 0.7 / 2
+        cover.snp.makeConstraints { make in
+            make.width.height.equalTo(24 * ratio * 0.7)
+            make.center.equalTo(checkMark.snp.center)
+        }
+        
+        view.addSubview(label)
+        label.text = text
+        label.textColor = .gray0
+        label.font = UIFont.notoBold(size: 14 * ratio)
+        label.adjustsFontSizeToFitWidth = true
+        label.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(checkMark.snp.right).offset(8)
+        }
+
+        return view
+    }
+   
 }

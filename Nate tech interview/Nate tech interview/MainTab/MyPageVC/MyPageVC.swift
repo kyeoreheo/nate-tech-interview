@@ -24,6 +24,8 @@ class MyPageVC: UIViewController {
     private lazy var phoneInfoField = viewModel.informationField(
                      labelText: "phone", textFieldText: "+1 917-123-1234",
                      action: #selector(changePhone), target: self)
+    
+    private lazy var notificationView = viewModel.notificationView()
     private let msgNotificationSwitch = UISwitch()
     private let msgNotificationLabel = UILabel()
     
@@ -101,7 +103,7 @@ class MyPageVC: UIViewController {
         view.addSubview(msgNotificationSwitch)
         msgNotificationSwitch.tintColor = .gray3
         msgNotificationSwitch.onTintColor = .green
-        msgNotificationSwitch.addTarget(self, action: #selector(toggleNotification), for: .touchUpInside)
+        msgNotificationSwitch.addTarget(self, action: #selector(toggleSwitch), for: .touchUpInside)
         msgNotificationSwitch.snp.makeConstraints { make in
             make.height.equalTo(31 * ratio)
             make.top.equalTo(phoneInfoField.snp.bottom).offset(20.5)
@@ -119,12 +121,9 @@ class MyPageVC: UIViewController {
             make.right.equalTo(msgNotificationSwitch.snp.left).offset(-8)
         }
     }
-    
-    @objc func toggleNotification() {
-        
-    }
-    
+
     @objc func changePhone() {
+        pushVC(ChangePhoneVC())
     }
     
     @objc func changeAddress() {
@@ -133,7 +132,48 @@ class MyPageVC: UIViewController {
     
     @objc func changeCreditCard() {
         pushVC(ChangeCardVC())
-
+    }
+    
+    @objc func toggleSwitch() {
+        if msgNotificationSwitch.isOn {
+            presentNotification()
+            msgNotificationLabel.text = "We will send you msg when your\ndelivery status gets updated! 👍🏼"
+        } else {
+            msgNotificationLabel.text = "Do you want to get notified with message\nabout delivery status?"
+        }
+    }
+    
+    func presentNotification() {
+        msgNotificationSwitch.isUserInteractionEnabled = false
+        view.addSubview(notificationView)
+        notificationView.alpha = 0
+        notificationView.snp.makeConstraints { make in
+            make.height.equalTo(48 * ratio)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn,
+        animations: { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.notificationView.alpha = 1
+            strongSelf.notificationView.frame.origin.y += (48 * ratio) + 16
+        },
+        completion: { [weak self] finished in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn,
+            animations: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.notificationView.alpha = 0
+                strongSelf.notificationView.frame.origin.y -= (48 * ratio) + 16
+            },
+            completion:  { [weak self] finished in
+                guard let strongSelf = self else { return }
+                strongSelf.notificationView.removeFromSuperview()
+                strongSelf.msgNotificationSwitch.isUserInteractionEnabled = true
+            })}
+        })
     }
 
 }
