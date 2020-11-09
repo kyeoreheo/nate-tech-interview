@@ -6,11 +6,14 @@
 //
 
 import UIKit
+protocol OrderHistoryDelegate: class {
+    func orderTapped(index: Int)
+}
 
 class OrderHistoryCVC: UICollectionViewController {
     // MARK:- Properties
-    public lazy var viewModel  = OrderVM(self)
-//    weak var delegate: ProductCellDelegate?
+    private lazy var viewModel  = OrderVM(self)
+    weak var delegate: OrderHistoryDelegate?
     public var products = [API.ProductResponse]() {
         didSet {
             collectionView.reloadData()
@@ -49,7 +52,7 @@ class OrderHistoryCVC: UICollectionViewController {
 extension OrderHistoryCVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: view.frame.width / 2)
+        return CGSize(width: view.frame.width, height: view.frame.width * 0.45)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -60,14 +63,13 @@ extension OrderHistoryCVC: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! OrderHistoryCell
         
-        let currentItem = products[indexPath.row]
-        cell.viewModel.filterValues(productName: currentItem.title,
-             imageStringURLs: currentItem.images,
-             merchant: currentItem.merchant,
-             createdAt: currentItem.createdAt,
-             websiteURL: currentItem.url)
+        cell.status = viewModel.randomStatus()
+        cell.viewModel.filterValues(product: products[indexPath.row])
 //        cell.delegate = delegate
 
         return cell
+    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.orderTapped(index: indexPath.row)
     }
 }

@@ -42,11 +42,18 @@ class OrderVC: UIViewController {
         }
         
         view.addSubview(orderHistoryCVC.view)
-//        orderHistoryCVC.delegate = self
+        orderHistoryCVC.delegate = self
         orderHistoryCVC.view.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
+}
+
+extension OrderVC: OrderHistoryDelegate {
+    func orderTapped(index: Int) {
+        pushVC(OrderDetailVC(product: products[index]))
+    }
+    
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		142305BF67B9D2BF4F604737 /* Pods_Nate_tech_interview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF83BEAEBB7FF3A197B992EC /* Pods_Nate_tech_interview.framework */; };
+		3132120C2559FEC700304A7E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3132120B2559FEC700304A7E /* User.swift */; };
 		315C28F5255717F400D3B133 /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 315C28F0255717F400D3B133 /* NotoSansCJKkr-Bold.otf */; };
 		315C28F6255717F400D3B133 /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 315C28F0255717F400D3B133 /* NotoSansCJKkr-Bold.otf */; };
 		315C28F7255717F400D3B133 /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 315C28F0255717F400D3B133 /* NotoSansCJKkr-Bold.otf */; };
@@ -31,6 +32,7 @@
 		315C293C2558BD5000D3B133 /* ChangePhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C293B2558BD5000D3B133 /* ChangePhoneVC.swift */; };
 		315C294D25590EFA00D3B133 /* OrderHistoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C294C25590EFA00D3B133 /* OrderHistoryCVC.swift */; };
 		315C295325590F0F00D3B133 /* OrderHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C295225590F0F00D3B133 /* OrderHistoryCell.swift */; };
+		315C295B2559996300D3B133 /* OrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C295A2559996300D3B133 /* OrderDetailVC.swift */; };
 		31A410EA2555A95E00BC0C02 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A410E92555A95E00BC0C02 /* SplashVC.swift */; };
 		31A4110E2555DEAD00BC0C02 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A4110D2555DEAD00BC0C02 /* MainTabBar.swift */; };
 		31A411162555DEBD00BC0C02 /* MainTabBarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A411152555DEBD00BC0C02 /* MainTabBarVM.swift */; };
@@ -79,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		25B4D41E8754AF4DA7AC5835 /* Pods-Nate tech interview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nate tech interview.debug.xcconfig"; path = "Target Support Files/Pods-Nate tech interview/Pods-Nate tech interview.debug.xcconfig"; sourceTree = "<group>"; };
+		3132120B2559FEC700304A7E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		315C28F0255717F400D3B133 /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansCJKkr-Bold.otf"; path = "../../../../../../Downloads/NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
 		315C28F1255717F400D3B133 /* NotoSansCJKkr-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansCJKkr-Black.otf"; path = "../../../../../../Downloads/NotoSansCJKkr-Black.otf"; sourceTree = "<group>"; };
 		315C28F2255717F400D3B133 /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansCJKkr-Regular.otf"; path = "../../../../../../Downloads/NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 		315C293B2558BD5000D3B133 /* ChangePhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneVC.swift; sourceTree = "<group>"; };
 		315C294C25590EFA00D3B133 /* OrderHistoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryCVC.swift; sourceTree = "<group>"; };
 		315C295225590F0F00D3B133 /* OrderHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryCell.swift; sourceTree = "<group>"; };
+		315C295A2559996300D3B133 /* OrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailVC.swift; sourceTree = "<group>"; };
 		31A410E92555A95E00BC0C02 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		31A4110D2555DEAD00BC0C02 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		31A411152555DEBD00BC0C02 /* MainTabBarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVM.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				31A411382555E05E00BC0C02 /* OrderVC.swift */,
 				315C294C25590EFA00D3B133 /* OrderHistoryCVC.swift */,
 				315C295225590F0F00D3B133 /* OrderHistoryCell.swift */,
+				315C295A2559996300D3B133 /* OrderDetailVC.swift */,
 			);
 			path = OrderVC;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 			children = (
 				31A411462555E7A300BC0C02 /* API.swift */,
 				31A4114E2555E7B600BC0C02 /* API+Products.swift */,
+				3132120B2559FEC700304A7E /* User.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -522,6 +528,8 @@
 				31A4113E2555E1C900BC0C02 /* UIImage+.swift in Sources */,
 				315C294D25590EFA00D3B133 /* OrderHistoryCVC.swift in Sources */,
 				31A411162555DEBD00BC0C02 /* MainTabBarVM.swift in Sources */,
+				315C295B2559996300D3B133 /* OrderDetailVC.swift in Sources */,
+				3132120C2559FEC700304A7E /* User.swift in Sources */,
 				315C295325590F0F00D3B133 /* OrderHistoryCell.swift in Sources */,
 				31A4110E2555DEAD00BC0C02 /* MainTabBar.swift in Sources */,
 				31A411312555E05600BC0C02 /* HomeVC.swift in Sources */,

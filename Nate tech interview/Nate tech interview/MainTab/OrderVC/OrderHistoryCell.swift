@@ -15,13 +15,10 @@ class OrderHistoryCell: UICollectionViewCell {
     public let productImage = UIImageView()
     public let productName = UILabel()
     public let trackNumberLabel = UILabel()
-    public let currentStatus = UILabel()
+    public let currentStatusLabel = UILabel()
     public lazy var statusBar = viewModel.statusBar()
     
     public var status: DeliveryStatus = .orderReceived
-    
-
-//    public let 
     
     // MARK:- Lifecycle
     override init(frame: CGRect) {
@@ -36,7 +33,6 @@ class OrderHistoryCell: UICollectionViewCell {
     
     private func configureView() {
         backgroundColor = .gray1
-
     }
     
     private func configureUI() {
@@ -58,10 +54,23 @@ class OrderHistoryCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(-24)
         }
         
+        addSubview(currentStatusLabel)
+        if status == .pending || status == .missing {
+            currentStatusLabel.textColor = .red
+        } else {
+            currentStatusLabel.textColor = .black
+        }
+        currentStatusLabel.font = UIFont.notoReg(size: 14 * ratio)
+        currentStatusLabel.textColor = .gray7
+        currentStatusLabel.snp.makeConstraints { make in
+            make.top.equalTo(productImage.snp.bottom)
+            make.left.equalToSuperview().offset(24)
+        }
+        
         addSubview(statusBar)
         statusBar.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.top.equalTo(productImage.snp.bottom).offset(8)
+            make.top.equalTo(currentStatusLabel.snp.bottom)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
         }

@@ -21,7 +21,7 @@ enum TextFieldType {
     case email
 }
 
-enum DeliveryStatus {
+enum DeliveryStatus: Int {
     case orderReceived
     case shipped
     case delivered

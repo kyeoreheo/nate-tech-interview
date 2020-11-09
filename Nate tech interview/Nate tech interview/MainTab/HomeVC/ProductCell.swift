@@ -13,8 +13,8 @@ protocol ProductCellDelegate: class {
 
 class ProductCell: UICollectionViewCell {
     // MARK:- ViewComponents
-    public lazy var productImagePVC = ProductImagePVC()
-    public let productName = UILabel()
+    public let productImagePVC = ProductImagePVC()
+    public let productNameLable = UILabel()
     public let popUpMerchantLabel = UILabel()
     public let popUpCreatedDateLabel = UILabel()
     public let popUpWebsiteButton = UIButton()
@@ -65,11 +65,11 @@ class ProductCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(-24)
         }
         
-        addSubview(productName)
-        productName.font = UIFont.notoReg(size: 24 * ratio)
-        productName.numberOfLines = 2
-        productName.textColor = .black
-        productName.snp.makeConstraints { make in
+        addSubview(productNameLable)
+        productNameLable.font = UIFont.notoReg(size: 24 * ratio)
+        productNameLable.numberOfLines = 2
+        productNameLable.textColor = .black
+        productNameLable.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview().offset(24)
             make.right.equalTo(detailButton.snp.left)
@@ -77,7 +77,7 @@ class ProductCell: UICollectionViewCell {
         
         addSubview(productImagePVC.view)
         productImagePVC.view.snp.makeConstraints { make in
-            make.top.equalTo(productName.snp.bottom).offset(8)
+            make.top.equalTo(productNameLable.snp.bottom).offset(8)
             make.height.equalTo(frame.width * 0.8)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
@@ -163,7 +163,7 @@ class ProductCell: UICollectionViewCell {
     }
     
     @objc func displayDetail() {
-        popUpProductName.text = productName.text
+        popUpProductName.text = productNameLable.text
         if isDetailOn {
             isDetailOn = false
             UIView.animate(withDuration: 0.5) {

@@ -27,9 +27,9 @@ class HomeVM {
         else { return }
         
         if productName.count > 0 {
-            cell.productName.text = productName
+            cell.productNameLable.text = productName
         } else {
-            cell.productName.text = "Name is missing.\nWe are looking for it!🤓"
+            cell.productNameLable.text = "Name is missing.\nWe are looking for it!🤓"
         }
         
         if merchant.count > 0 {
