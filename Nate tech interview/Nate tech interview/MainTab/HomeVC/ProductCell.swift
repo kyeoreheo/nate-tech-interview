@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ProductCellDelegate: class {
+    func purchasedButtonTapped(completion: @escaping(Bool?) -> Void)
+}
+
 class ProductCell: UICollectionViewCell {
     // MARK:- ViewComponents
     public lazy var productImagePVC = ProductImagePVC()
@@ -18,8 +22,10 @@ class ProductCell: UICollectionViewCell {
     private let visualEffectView = UIVisualEffectView()
     private let popUpFrame = UIView()
     private let popUpTitleLabel = UILabel()
+    private let purchaseButton = UIButton()
     
     // MARK:- Properties
+    weak var delegate: ProductCellDelegate?
     public lazy var viewModel = HomeVM(self)
     public var imageStringURLs = [String]()
     public var webSiteURL = ""
@@ -133,6 +139,15 @@ class ProductCell: UICollectionViewCell {
             make.left.equalToSuperview().offset(8)
             make.centerY.equalTo(popUpCreatedDateLabel.snp.centerY)
         }
+        
+        popUpFrame.addSubview(purchaseButton)
+        purchaseButton.setImage(UIImage(named: "buy"), for: .normal)
+        purchaseButton.addTarget(self, action: #selector(purchaseItem), for: .touchUpInside)
+        purchaseButton.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-8)
+        }
     }
     
     override func prepareForReuse() {
@@ -170,5 +185,15 @@ class ProductCell: UICollectionViewCell {
     @objc func openWebsite() {
         guard let url = URL(string: webSiteURL) else { return }
         UIApplication.shared.open(url)
+    }
+    
+    @objc func purchaseItem() {
+        delegate?.purchasedButtonTapped { [weak self] finished in
+            guard let strongSelf = self, let finished = finished
+            else { return }
+            if finished {
+                strongSelf.displayDetail()
+            }
+        }
     }
 }

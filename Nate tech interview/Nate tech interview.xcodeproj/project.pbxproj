@@ -26,6 +26,9 @@
 		315C290E25575BF700D3B133 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C290D25575BF700D3B133 /* String+.swift */; };
 		315C290F25575BF700D3B133 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C290D25575BF700D3B133 /* String+.swift */; };
 		315C291025575BF700D3B133 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C290D25575BF700D3B133 /* String+.swift */; };
+		315C292F2558BCC700D3B133 /* ChangeAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C292E2558BCC700D3B133 /* ChangeAddressVC.swift */; };
+		315C29372558BD4300D3B133 /* ChangeCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C29362558BD4300D3B133 /* ChangeCardVC.swift */; };
+		315C293C2558BD5000D3B133 /* ChangePhoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315C293B2558BD5000D3B133 /* ChangePhoneVC.swift */; };
 		31A410EA2555A95E00BC0C02 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A410E92555A95E00BC0C02 /* SplashVC.swift */; };
 		31A4110E2555DEAD00BC0C02 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A4110D2555DEAD00BC0C02 /* MainTabBar.swift */; };
 		31A411162555DEBD00BC0C02 /* MainTabBarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A411152555DEBD00BC0C02 /* MainTabBarVM.swift */; };
@@ -80,6 +83,9 @@
 		315C28F3255717F400D3B133 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BlackHanSans-Regular.ttf"; path = "../../../../../../Downloads/BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		315C28F4255717F400D3B133 /* NotoSansCJKkr-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansCJKkr-Thin.otf"; path = "../../../../../../Downloads/NotoSansCJKkr-Thin.otf"; sourceTree = "<group>"; };
 		315C290D25575BF700D3B133 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		315C292E2558BCC700D3B133 /* ChangeAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAddressVC.swift; sourceTree = "<group>"; };
+		315C29362558BD4300D3B133 /* ChangeCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCardVC.swift; sourceTree = "<group>"; };
+		315C293B2558BD5000D3B133 /* ChangePhoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneVC.swift; sourceTree = "<group>"; };
 		31A410E92555A95E00BC0C02 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		31A4110D2555DEAD00BC0C02 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		31A411152555DEBD00BC0C02 /* MainTabBarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVM.swift; sourceTree = "<group>"; };
@@ -238,6 +244,9 @@
 			children = (
 				31A411672556175D00BC0C02 /* MyPageVM.swift */,
 				31A4112B2555E04800BC0C02 /* MyPageVC.swift */,
+				315C292E2558BCC700D3B133 /* ChangeAddressVC.swift */,
+				315C29362558BD4300D3B133 /* ChangeCardVC.swift */,
+				315C293B2558BD5000D3B133 /* ChangePhoneVC.swift */,
 			);
 			path = MyPageVC;
 			sourceTree = "<group>";
@@ -517,11 +526,14 @@
 				31A4115B2556170800BC0C02 /* HomeVM.swift in Sources */,
 				31A4112C2555E04800BC0C02 /* MyPageVC.swift in Sources */,
 				31A653D82555A4FC006A5A19 /* SceneDelegate.swift in Sources */,
+				315C293C2558BD5000D3B133 /* ChangePhoneVC.swift in Sources */,
 				31A4116D2556184200BC0C02 /* ProductFeedCVC.swift in Sources */,
 				31A411472555E7A300BC0C02 /* API.swift in Sources */,
 				31A41172255618A300BC0C02 /* ProductCell.swift in Sources */,
 				315C290E25575BF700D3B133 /* String+.swift in Sources */,
+				315C292F2558BCC700D3B133 /* ChangeAddressVC.swift in Sources */,
 				31A4111F2555DF9E00BC0C02 /* UIColor+.swift in Sources */,
+				315C29372558BD4300D3B133 /* ChangeCardVC.swift in Sources */,
 				31A411682556175D00BC0C02 /* MyPageVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
