@@ -153,7 +153,7 @@ class CustomView {
         button.layer.borderWidth = isActive ? 0 : 2
         button.layer.cornerRadius = 5
         button.setTitle(text, for:.normal)
-        button.titleLabel?.font = UIFont.notoBold(size: 14 * ratio)
+        button.titleLabel?.font = UIFont.notoBold(size: 18 * ratio)
         button.addGestureRecognizer(UITapGestureRecognizer(target: target, action: action))
         button.isEnabled = isActive
 
