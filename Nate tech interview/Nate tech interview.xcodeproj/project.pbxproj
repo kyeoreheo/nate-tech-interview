@@ -68,6 +68,7 @@
 		31C140EE255B198900EE31CF /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140ED255B198900EE31CF /* SignUpVC.swift */; };
 		31C140F4255B19B800EE31CF /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140F3255B19B800EE31CF /* CustomView.swift */; };
 		31C140F9255B1C3100EE31CF /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140F8255B1C3100EE31CF /* UILabel+.swift */; };
+		31C14101255B356F00EE31CF /* AuthenticationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C14100255B356F00EE31CF /* AuthenticationVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		31C140ED255B198900EE31CF /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		31C140F3255B19B800EE31CF /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		31C140F8255B1C3100EE31CF /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		31C14100255B356F00EE31CF /* AuthenticationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVM.swift; sourceTree = "<group>"; };
 		35ED44B484E802E005032118 /* Pods-Nate tech interview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nate tech interview.release.xcconfig"; path = "Target Support Files/Pods-Nate tech interview/Pods-Nate tech interview.release.xcconfig"; sourceTree = "<group>"; };
 		DF83BEAEBB7FF3A197B992EC /* Pods_Nate_tech_interview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nate_tech_interview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -346,6 +348,7 @@
 		31C140E7255B196900EE31CF /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				31C14100255B356F00EE31CF /* AuthenticationVM.swift */,
 				31C140E8255B198000EE31CF /* LogInVC.swift */,
 				31C140ED255B198900EE31CF /* SignUpVC.swift */,
 			);
@@ -556,6 +559,7 @@
 				31A41189255632A600BC0C02 /* ProductImage.swift in Sources */,
 				31A411242555DFD300BC0C02 /* UIViewController+.swift in Sources */,
 				31A41177255629AA00BC0C02 /* UIFont+.swift in Sources */,
+				31C14101255B356F00EE31CF /* AuthenticationVM.swift in Sources */,
 				31A4113E2555E1C900BC0C02 /* UIImage+.swift in Sources */,
 				31C140E0255B139E00EE31CF /* API+Auth.swift in Sources */,
 				315C294D25590EFA00D3B133 /* OrderHistoryCVC.swift in Sources */,

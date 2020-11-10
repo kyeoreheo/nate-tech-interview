@@ -30,7 +30,8 @@ extension UIViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
-        buttonConstraint?.constant = (isBigPhone ? 50 + 8 : 16 + 16) - keyboardSize.cgRectValue.height
+        buttonConstraint?.constant = (isBigPhone ? 50 + 8 : 16 + 16) - keyboardSize.cgRectValue.height - (isInAuthenticationView ? 48 : 0)
+        print("Keyboard will show \(buttonConstraint?.constant)")
         let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         UIView.animate(withDuration: animationDuration) {
             self.view.layoutIfNeeded()

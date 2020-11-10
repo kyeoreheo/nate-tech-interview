@@ -47,11 +47,11 @@ class ChangeAddresssVC: UIViewController {
         configureUI()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         subscribeToShowKeyboardNotifications()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         deregisterFromKeyboardNotifications()
     }
 

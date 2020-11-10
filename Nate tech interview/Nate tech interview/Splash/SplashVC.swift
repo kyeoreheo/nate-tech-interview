@@ -87,7 +87,14 @@ class SplashVC: UIViewController {
     }
     
     @objc func presentLogInVC() {
-        //pushVC(LogInVC)
-    }
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let navigation = UINavigationController(rootViewController: LogInVC())
+//            let navigation = UINavigationController(rootViewController: MainTabBar())
 
+            navigation.modalPresentationStyle = .fullScreen
+            navigation.navigationBar.isHidden = true
+            strongSelf.present(navigation, animated: true, completion: nil)
+        }
+    }
 }

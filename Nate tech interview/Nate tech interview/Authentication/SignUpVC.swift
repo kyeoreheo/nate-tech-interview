@@ -83,7 +83,7 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(lastNameTextField)
         lastNameTextField.snp.makeConstraints { make in
             make.height.equalTo(36 * ratio)
-            make.top.equalTo(addPhotoButton.snp.bottom).offset(20)
+            make.top.equalTo(firstNameTextField.snp.bottom).offset(20)
             make.left.equalTo(view.snp.centerX).offset(15)
             make.right.equalToSuperview().offset(-30)
         }
