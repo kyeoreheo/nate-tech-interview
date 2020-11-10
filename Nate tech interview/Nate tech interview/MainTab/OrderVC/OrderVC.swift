@@ -14,9 +14,9 @@ class OrderVC: UIViewController {
     
     // MARK:- Properties
     private lazy var viewModel = OrderVM(self)
-    var products = [API.ProductResponse]() {
+    var orders = [Order]() {
         didSet {
-            orderHistoryCVC.products = products
+            orderHistoryCVC.orders = orders
         }
     }
     
@@ -25,10 +25,13 @@ class OrderVC: UIViewController {
         configure()
         configureUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.getProducts()
+    }
     // MARK:- Configures
     private func configure() {
         view.backgroundColor = .white
-        viewModel.getProducts()
     }
     
     private func configureUI() {
@@ -53,7 +56,7 @@ class OrderVC: UIViewController {
 
 extension OrderVC: OrderHistoryDelegate {
     func orderTapped(index: Int) {
-        pushVC(OrderDetailVC(product: products[index]))
+        pushVC(OrderDetailVC(product: orders[index].product))
     }
     
 }

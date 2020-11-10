@@ -14,7 +14,7 @@ class OrderHistoryCVC: UICollectionViewController {
     // MARK:- Properties
     private lazy var viewModel  = OrderVM(self)
     weak var delegate: OrderHistoryDelegate?
-    public var products = [API.ProductResponse]() {
+    public var orders = [Order]() {
         didSet {
             collectionView.reloadData()
         }
@@ -57,14 +57,14 @@ extension OrderHistoryCVC: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return products.count
+        return orders.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! OrderHistoryCell
         
         cell.status = viewModel.randomStatus()
-        cell.viewModel.filterValues(product: products[indexPath.row])
+        cell.viewModel.filterValues(product: orders[indexPath.row].product)
 //        cell.delegate = delegate
 
         return cell

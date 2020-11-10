@@ -10,6 +10,7 @@ import Foundation
 struct Order {
     let product: API.ProductResponse
     let purchaseDate: Date
+    let deliveryStatus: DeliveryStatus
 }
 
 class User {
@@ -30,6 +31,13 @@ class User {
     func setAddress(_ address: Address) { self.address = address }
     func setCard(_ card: Card) { self.card = card }
     func setPhone(_ phone: String) { self.phone = phone }
-    func addOrder(_ product: API.ProductResponse) { self.orders.append(Order(product: product, purchaseDate: Date())) }
+    func addOrder(_ product: API.ProductResponse) {
+        self.orders.append(Order(product: product, purchaseDate: Date(), deliveryStatus: randomStatus()))
+    }
+    
+    func randomStatus() -> DeliveryStatus {
+        let randomNumber = Int.random(in: 0...6)
+        return DeliveryStatus(rawValue: randomNumber) ?? .orderReceived
+    }
     
 }
