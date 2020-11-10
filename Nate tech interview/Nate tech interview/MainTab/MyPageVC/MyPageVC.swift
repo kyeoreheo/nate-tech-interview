@@ -11,19 +11,19 @@ class MyPageVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let versionLabel = UILabel()
-    private lazy var usernameInfoField = viewModel.informationField(
-                     labelText: "username", textFieldText: "Kyeore Heo")
-    private lazy var emailInfoField = viewModel.informationField(
-                     labelText: "email", textFieldText: "91kyoheo@gmail.com")
-    private lazy var addressInfoField = viewModel.informationField(
-                     labelText: "address", textFieldText: "45 River, Jersey City, NJ, 07310",
-                     action: #selector(changeAddress), target: self)
-    private lazy var cardInfoField = viewModel.informationField(
-                     labelText: "card", textFieldText: "**** - **** - **** - 1234",
-                     action: #selector(changeCreditCard), target: self)
-    private lazy var phoneInfoField = viewModel.informationField(
-                     labelText: "phone", textFieldText: "+1 917-123-1234",
-                     action: #selector(changePhone), target: self)
+    public lazy var usernameInfoField = viewModel.informationField(
+                    labelText: "username", textFieldText: " ")
+    public lazy var emailInfoField = viewModel.informationField(
+                    labelText: "email", textFieldText: " ")
+    public lazy var addressInfoField = viewModel.informationField(
+                    labelText: "address", textFieldText: " ",
+                    action: #selector(changeAddress), target: self)
+    public lazy var cardInfoField = viewModel.informationField(
+                    labelText: "card", textFieldText: "**** **** **** 1234",
+                    action: #selector(changeCreditCard), target: self)
+    public lazy var phoneInfoField = viewModel.informationField(
+                    labelText: "phone", textFieldText: "000 000 0000",
+                    action: #selector(changePhone), target: self)
     
     private lazy var notificationView = viewModel.notificationView()
     private let msgNotificationSwitch = UISwitch()
@@ -34,11 +34,19 @@ class MyPageVC: UIViewController {
     
     // MARK:- Lifecycle
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        configureView()
         configureUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchUser()
+    }
+    
     // MARK:- Configures
+    private func configureView() {
+        view.backgroundColor = .white
+    }
+    
     private func configureUI() {
         view.addSubview(titleLabel)
         titleLabel.text = "My Page"

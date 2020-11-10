@@ -13,10 +13,10 @@ class OrderDetailVC: UIViewController {
     private let scrollView = UIScrollView(frame: .zero)
     private var stackView: UIStackView?
     public lazy var productImagePVC = ProductImagePVC()
+    public lazy var notificationView = MyPageVM(self).notificationView(text: "Track number had been copied")
 
     // MARK:- Properties
     private lazy var viewModel = OrderVM(self)
-//    private let imageStringURLs: [String]
     private let product: API.ProductResponse
     var imageURLs = [String]()
     var status: DeliveryStatus = .orderReceived
@@ -28,12 +28,7 @@ class OrderDetailVC: UIViewController {
     var card = "****-****-****-3030"
     var trackNumber = "4938 2093 2934 AD82"
     var orderDate = Date()
-    
-//    private lazy var partnerBannerPVC = PartnerBannerPVC(
-//                                  transitionStyle: .scroll,
-//                                  navigationOrientation: .horizontal,
-//                                  options: [UIPageViewController.OptionsKey.interPageSpacing : 0])
-//
+
     private var originalBannerTransform: CATransform3D?
     
     // MARK:- Lifecycle
@@ -56,7 +51,6 @@ class OrderDetailVC: UIViewController {
     private func configure() {
         view.backgroundColor = .white
         scrollView.delegate = self
-        //productImagePVC.imageStringURLs = product.images
         viewModel.filterValues(product: product)
         status = viewModel.randomStatus()
         
@@ -102,7 +96,7 @@ class OrderDetailVC: UIViewController {
         
         let headerView = viewModel.orderDetailHeader(productName: productName, status: status, trackNumber: trackNumber, target: self, action: #selector(copyTrackNumber))
         
-        let bodyView = viewModel.orderDetailBody(seller: merchant, recipient: "Kyeore Heo", website: webSiteURL, address: address, card: card, target: self, action: #selector(visitWebsite))
+        let bodyView = viewModel.orderDetailBody(seller: merchant, recipient: "Kyeore Heo", website: webSiteURL, address: address, card: card, target: self, action: #selector(openWebsite))
 
 
         stackView = UIStackView(arrangedSubviews: [headerView, bodyView])
@@ -120,15 +114,51 @@ class OrderDetailVC: UIViewController {
         }
     }
     
+    func purchasedButtonTapped() {
+        view.isUserInteractionEnabled = false
+        view.addSubview(notificationView)
+        notificationView.alpha = 0
+        notificationView.snp.makeConstraints { make in
+            make.height.equalTo(48 * ratio)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn,
+        animations: { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.notificationView.alpha = 1
+            strongSelf.notificationView.frame.origin.y += (48 * ratio) + 16
+        },
+        completion: { [weak self] finished in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn,
+            animations: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.notificationView.alpha = 0
+                strongSelf.notificationView.frame.origin.y -= (48 * ratio) + 16
+            },
+            completion:  { [weak self] finished in
+                guard let strongSelf = self else { return }
+                strongSelf.notificationView.removeFromSuperview()
+                strongSelf.view.isUserInteractionEnabled = true
+            })}
+        })
+    }
+    
     // MARK:- Selectors
     @objc func copyTrackNumber() {
         let pastedboard = UIPasteboard.general
         pastedboard.string = trackNumber
+        purchasedButtonTapped()
     }
     
-    @objc func visitWebsite() {
-        
+    @objc func openWebsite() {
+        guard let url = URL(string: webSiteURL) else { return }
+        UIApplication.shared.open(url)
     }
+
 }
 
 extension OrderDetailVC: UIScrollViewDelegate {
@@ -156,10 +186,5 @@ extension OrderDetailVC: UIScrollViewDelegate {
             imageTransform = CATransform3DScale(imageTransform, 1.0 + bannerRatio, 1.0 + bannerRatio, 0)
             productImagePVC.view.layer.transform = imageTransform
         }
-    }
-    
-    @objc func openWebsite() {
-        guard let url = URL(string: webSiteURL) else { return }
-        UIApplication.shared.open(url)
     }
 }

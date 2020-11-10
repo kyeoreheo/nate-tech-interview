@@ -99,6 +99,7 @@ class ChangePhoneVC: UIViewController {
     }
 
     @objc func applyChanges() {
+        User.shared.setPhone(phoneNumber)
         popVC()
     }
 }

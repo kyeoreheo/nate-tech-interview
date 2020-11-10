@@ -66,6 +66,7 @@ extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
              createdAt: currentItem.createdAt,
              websiteURL: currentItem.url)
         cell.delegate = delegate
+        cell.product = products[indexPath.row]
 
         return cell
     }

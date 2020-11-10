@@ -16,10 +16,11 @@ class OrderVM {
     
     func getProducts() {
         guard let vc = viewController as? OrderVC else { return }
-        API.getProducts() { response in
-            guard let data = response?.data else { return }
-            vc.products = data.products
-        }
+//        API.getProducts() { response in
+//            guard let data = response?.data else { return }
+//            vc.products = data.products
+//        }
+        vc.orders = User.shared.orders
     }
     
     /// Filter product for HistoryCell
@@ -85,37 +86,7 @@ class OrderVM {
                     }
                 }
             }
-                        
-//            let status = randomStatus()
-//            applyStatus(status: status)
-//            switch status {
-//            case .orderReceived:
-//                vc.currentStatusLabel.text = "Status: order received 👍🏼"
-//            case .shipped:
-//                vc.currentStatusLabel.text = "Status: order received 🚛"
-//            case .delivered:
-//                vc.currentStatusLabel.text = "Status: deliverd 🎁"
-//            case .pending:
-//                vc.currentStatusLabel.text = "Status: pending 🧐"
-//                vc.currentStatusLabel.textColor = .red
-//            case .missing:
-//                vc.currentStatusLabel.text = "Status: missing 🤔"
-//                vc.currentStatusLabel.textColor = .red
-//            case .refunded:
-//                vc.currentStatusLabel.text = "Status: refunded 🚛"
-//            }
-//
-//            let filteredURLs = product.images.filter {
-//                isValidUrl(urlString: $0)
-//            }
-//
-//            if filteredURLs.count > 0 {
-//                cell.productImage.sd_setImage(with: URL(string: filteredURLs[0]),placeholderImage: UIImage(named: "imageNotFound"))
-//            } else {
-//                cell.productImage.image = UIImage(named: "imageComingSoon")
-//            }
         }
-       
     }
 
     func statusText(status: DeliveryStatus) -> String {

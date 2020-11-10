@@ -30,6 +30,7 @@ class ProductCell: UICollectionViewCell {
     public var imageStringURLs = [String]()
     public var webSiteURL = ""
     private var isDetailOn = false
+    public var product: API.ProductResponse?
 
     // MARK:- Lifecycle
     override init(frame: CGRect) {
@@ -188,6 +189,9 @@ class ProductCell: UICollectionViewCell {
     }
     
     @objc func purchaseItem() {
+        //User.shared.addOrder(API.ProductResponse(id: "", title: "", images: <#T##[String]#>, url: <#T##String#>, merchant: <#T##String#>, createdAt: <#T##String#>))
+        guard let product = product else { return }
+        User.shared.addOrder(product)
         delegate?.purchasedButtonTapped { [weak self] finished in
             guard let strongSelf = self, let finished = finished
             else { return }
