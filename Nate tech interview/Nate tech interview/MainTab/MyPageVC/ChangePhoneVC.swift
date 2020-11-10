@@ -12,9 +12,9 @@ class ChangePhoneVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let backButton = UIButton()
-    lazy var confirmButton = viewModel.generalButton(isActive: false,
+    lazy var confirmButton = CustomView().generalButton(isActive: false,
                                      target: self, action: #selector(applyChanges))
-    private lazy var phoneNumberTextField = viewModel.textField(placeHolder: "card number",
+    private lazy var phoneNumberTextField = CustomView().textField(placeHolder: "card number",
                                      target: self,
                                      action: #selector(cardNumberTextFieldDidChange),
                                      type: .phone)

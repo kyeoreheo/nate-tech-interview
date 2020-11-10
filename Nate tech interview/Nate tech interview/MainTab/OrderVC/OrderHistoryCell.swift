@@ -16,7 +16,7 @@ class OrderHistoryCell: UICollectionViewCell {
     public let productName = UILabel()
     public let trackNumberLabel = UILabel()
     public let currentStatusLabel = UILabel()
-    public lazy var statusBar = viewModel.statusBar()
+    public lazy var statusBar = CustomView().statusBar()
     
     public var status: DeliveryStatus = .orderReceived
     

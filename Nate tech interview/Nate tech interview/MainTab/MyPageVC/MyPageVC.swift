@@ -11,21 +11,21 @@ class MyPageVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let versionLabel = UILabel()
-    public lazy var usernameInfoField = viewModel.informationField(
+    public lazy var usernameInfoField = CustomView().informationField(
                     labelText: "username", textFieldText: " ")
-    public lazy var emailInfoField = viewModel.informationField(
+    public lazy var emailInfoField = CustomView().informationField(
                     labelText: "email", textFieldText: " ")
-    public lazy var addressInfoField = viewModel.informationField(
+    public lazy var addressInfoField = CustomView().informationField(
                     labelText: "address", textFieldText: " ",
                     action: #selector(changeAddress), target: self)
-    public lazy var cardInfoField = viewModel.informationField(
+    public lazy var cardInfoField = CustomView().informationField(
                     labelText: "card", textFieldText: "**** **** **** 1234",
                     action: #selector(changeCreditCard), target: self)
-    public lazy var phoneInfoField = viewModel.informationField(
+    public lazy var phoneInfoField = CustomView().informationField(
                     labelText: "phone", textFieldText: "000 000 0000",
                     action: #selector(changePhone), target: self)
     
-    private lazy var notificationView = viewModel.notificationView()
+    private lazy var notificationView = CustomView().notificationView()
     private let msgNotificationSwitch = UISwitch()
     private let msgNotificationLabel = UILabel()
     

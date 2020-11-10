@@ -16,10 +16,6 @@ class OrderVM {
     
     func getProducts() {
         guard let vc = viewController as? OrderVC else { return }
-//        API.getProducts() { response in
-//            guard let data = response?.data else { return }
-//            vc.products = data.products
-//        }
         vc.orders = User.shared.orders
     }
     
@@ -106,96 +102,6 @@ class OrderVM {
         }
     }
     
-    func statusBar() -> UIView {
-        let view = UIView()
-        let receivedCircle = UIView()
-        let receivedLabel = UILabel()
-        let bar1 = UIView()
-        let shippedCircle = UIView()
-        let shippedLabel = UILabel()
-        let bar2 = UIView()
-        let deliveredCircle = UIView()
-        let deliveredLabel = UILabel()
-        let circleSize: CGFloat = 30 * ratio
-        view.addSubview(bar1)
-        view.addSubview(bar2)
-        view.addSubview(receivedCircle)
-        receivedCircle.tag = 1
-        receivedCircle.backgroundColor = .gray5
-        receivedCircle.layer.cornerRadius = circleSize / 2
-        receivedCircle.snp.makeConstraints { make in
-            make.width.height.equalTo(circleSize)
-            make.left.equalToSuperview().offset(24)
-            make.centerY.equalToSuperview()
-        }
-        
-        view.addSubview(receivedLabel)
-        receivedLabel.text = "received"
-        receivedLabel.textColor = .gray5
-        receivedLabel.font = .notoReg(size: 12 * ratio)
-        receivedLabel.snp.makeConstraints { make in
-            make.top.equalTo(receivedCircle.snp.bottom).offset(4)
-            make.centerX.equalTo(receivedCircle.snp.centerX)
-        }
-        
-        view.addSubview(shippedCircle)
-        shippedCircle.tag = 2
-        shippedCircle.backgroundColor = .gray5
-        shippedCircle.layer.cornerRadius = circleSize / 2
-        shippedCircle.snp.makeConstraints { make in
-            make.width.height.equalTo(circleSize)
-            make.center.equalToSuperview()
-        }
-        
-        view.addSubview(shippedLabel)
-        shippedLabel.text = "shipped"
-        shippedLabel.textColor = .gray5
-        shippedLabel.font = .notoReg(size: 12 * ratio)
-        shippedLabel.snp.makeConstraints { make in
-            make.top.equalTo(shippedCircle.snp.bottom).offset(4)
-            make.centerX.equalTo(shippedCircle.snp.centerX)
-        }
-        
-        view.addSubview(deliveredCircle)
-        deliveredCircle.tag = 3
-        deliveredCircle.layer.cornerRadius = circleSize / 2
-        deliveredCircle.backgroundColor = .gray5
-        deliveredCircle.snp.makeConstraints { make in
-            make.width.height.equalTo(circleSize)
-            make.right.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-        
-        view.addSubview(deliveredLabel)
-        deliveredLabel.text = "delivered"
-        deliveredLabel.textColor = .gray5
-        deliveredLabel.font = .notoReg(size: 12 * ratio)
-        deliveredLabel.snp.makeConstraints { make in
-            make.top.equalTo(deliveredCircle.snp.bottom).offset(4)
-            make.centerX.equalTo(deliveredCircle.snp.centerX)
-        }
-        
-        bar1.tag = 10
-        bar1.backgroundColor = .gray5
-        bar1.snp.makeConstraints { make in
-            make.height.equalTo(5 * ratio)
-            make.left.equalTo(receivedCircle.snp.centerX)
-            make.right.equalTo(shippedCircle.snp.centerX)
-            make.centerY.equalToSuperview()
-        }
-        
-        bar2.tag = 20
-        bar2.backgroundColor = .gray5
-        bar2.snp.makeConstraints { make in
-            make.height.equalTo(5 * ratio)
-            make.left.equalTo(shippedCircle.snp.centerX)
-            make.right.equalTo(deliveredCircle.snp.centerX)
-            make.centerY.equalToSuperview()
-        }
-        
-        return view
-    }
-    
     func randomStatus() -> DeliveryStatus {
         let randomNumber = Int.random(in: 0...6)
         return DeliveryStatus(rawValue: randomNumber) ?? .orderReceived
@@ -246,7 +152,7 @@ class OrderVM {
         let view = UIView()
         let productNameLable = UILabel()
         let currentStatusLabel = UILabel()
-        let bar = statusBar()
+        let bar = CustomView().statusBar()
         let trackNumberLabel = UILabel()
         let copyButton = UIButton()
         

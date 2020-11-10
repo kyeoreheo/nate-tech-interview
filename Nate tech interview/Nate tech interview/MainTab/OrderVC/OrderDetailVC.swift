@@ -13,7 +13,7 @@ class OrderDetailVC: UIViewController {
     private let scrollView = UIScrollView(frame: .zero)
     private var stackView: UIStackView?
     public lazy var productImagePVC = ProductImagePVC()
-    public lazy var notificationView = MyPageVM(self).notificationView(text: "Track number had been copied")
+    public lazy var notificationView = CustomView().notificationView(text: "Track number had been copied")
 
     // MARK:- Properties
     private lazy var viewModel = OrderVM(self)

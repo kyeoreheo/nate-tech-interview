@@ -8,5 +8,10 @@ target 'Nate tech interview' do
   pod 'Alamofire', '~> 4.9.1'
   pod 'SnapKit'
   pod 'SDWebImage', '~> 5.0'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 
 end

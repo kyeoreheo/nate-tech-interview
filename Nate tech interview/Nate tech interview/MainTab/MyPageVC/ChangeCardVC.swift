@@ -11,13 +11,13 @@ class ChangeCardVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let backButton = UIButton()
-    lazy var confirmButton = viewModel.generalButton(isActive: false,
+    lazy var confirmButton = CustomView().generalButton(isActive: false,
                                      target: self, action: #selector(applyChanges))
-    private lazy var cardNumberTextField = viewModel.textField(placeHolder: "card number",
+    private lazy var cardNumberTextField = CustomView().textField(placeHolder: "card number",
                                      target: self,
                                      action: #selector(cardNumberTextFieldDidChange),
                                      type: .phone)
-    private lazy var cvvTextField = viewModel.textField(placeHolder: "cvv",
+    private lazy var cvvTextField = CustomView().textField(placeHolder: "cvv",
                                      target: self,
                                      action: #selector(cvvTextFieldDidChange),
                                      type: .phone)

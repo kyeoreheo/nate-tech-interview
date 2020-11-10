@@ -8,7 +8,9 @@
 import UIKit
 
 class SplashVC: UIViewController {
+    private let backgroundView = UIImageView()
     //MARK:- Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         applyBackground()
@@ -17,7 +19,13 @@ class SplashVC: UIViewController {
     }
     
     private func applyBackground() {
-        view.backgroundColor = .orange
+        view.addSubview(backgroundView)
+        backgroundView.alpha = 0.5
+        backgroundView.image = UIImage(named: "background")
+        backgroundView.contentMode = .scaleAspectFill
+        backgroundView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
     }
     
     private func applyGlobalVariables() {
@@ -29,13 +37,13 @@ class SplashVC: UIViewController {
     }
     
     private func presentMainTabBar() {
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            let navigation = UINavigationController(rootViewController: MainTabBar())
-            navigation.modalPresentationStyle = .fullScreen
-            navigation.navigationBar.isHidden = true
-            strongSelf.present(navigation, animated: false, completion: nil)
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let strongSelf = self else { return }
+//            let navigation = UINavigationController(rootViewController: MainTabBar())
+//            navigation.modalPresentationStyle = .fullScreen
+//            navigation.navigationBar.isHidden = true
+//            strongSelf.present(navigation, animated: false, completion: nil)
+//        }
     }
 
 }

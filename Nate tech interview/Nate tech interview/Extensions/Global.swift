@@ -19,6 +19,7 @@ enum TextFieldType {
     case card
     case password
     case email
+    case name
 }
 
 enum DeliveryStatus: Int {
