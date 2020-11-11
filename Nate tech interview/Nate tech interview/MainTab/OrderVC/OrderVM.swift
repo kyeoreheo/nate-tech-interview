@@ -55,9 +55,6 @@ class OrderVM {
             
             vc.createdDate = product.createdAt.substring(to: 10)
             vc.webSiteURL = product.url
-            if !isValidUrl(urlString: product.url) {
-                //vc.popUpWebsiteButton.isHidden = true
-            }
             
             let filteredURLs = product.images.filter {
                 isValidUrl(urlString: $0)

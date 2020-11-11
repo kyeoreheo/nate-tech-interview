@@ -8,9 +8,7 @@
 import UIKit
 
 class OrderHistoryCell: UICollectionViewCell {
-    // MARK:- ViewComponents
-
-    // MARK:- Properties
+    // MARK:- View components
     public lazy var viewModel = OrderVM(self)
     public let productImage = UIImageView()
     public let productName = UILabel()
@@ -18,9 +16,10 @@ class OrderHistoryCell: UICollectionViewCell {
     public let currentStatusLabel = UILabel()
     public lazy var statusBar = CustomView().statusBar()
     
+    // MARK:- Properties
     public var status: DeliveryStatus = .orderReceived
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
@@ -35,6 +34,7 @@ class OrderHistoryCell: UICollectionViewCell {
         backgroundColor = .gray1
     }
     
+    // MARK:- Configures
     private func configureUI() {
         addSubview(productImage)
         productImage.contentMode = .scaleAspectFit
@@ -74,7 +74,6 @@ class OrderHistoryCell: UICollectionViewCell {
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
         }
-    
     }
 
 }

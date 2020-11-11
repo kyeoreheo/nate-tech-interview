@@ -8,21 +8,21 @@
 import UIKit
 
 class SplashVC: UIViewController {
-    //MARK:- View components
+    // MARK:- View components
     private let backgroundView = UIImageView()
     private let nateLabel = UILabel()
     private let contentLabel = UILabel()
     private let nameLabel = UILabel()
     private lazy var startButton = CustomView().generalButton(isActive: true, text: "START", target: self, action: #selector(presentLogInVC))
-    //MARK:- Lifecycle
     
+    // MARK:- Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         applyGlobalVariables()
         configureUI()
-//        presentMainTabBar()
     }
     
+    // MARK:- Configures
     private func configureUI() {
         view.addSubview(backgroundView)
         backgroundView.alpha = 0.5
@@ -68,6 +68,7 @@ class SplashVC: UIViewController {
         }
     }
     
+    // MARK:- Helpers
     private func applyGlobalVariables() {
         let heightRatio: CGFloat = view.frame.height / 812.0
         ratio = heightRatio < 1 ? 1:heightRatio
@@ -75,25 +76,15 @@ class SplashVC: UIViewController {
         topSafeMargin = ( UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top ?? 0) as CGFloat
     }
     
-    private func presentMainTabBar() {
-//        DispatchQueue.main.async { [weak self] in
-//            guard let strongSelf = self else { return }
-//            let navigation = UINavigationController(rootViewController: MainTabBar())
-//            navigation.modalPresentationStyle = .fullScreen
-//            navigation.navigationBar.isHidden = true
-//            strongSelf.present(navigation, animated: false, completion: nil)
-//        }
-    }
-    
+    // MARK:- Selectors
     @objc func presentLogInVC() {
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             let navigation = UINavigationController(rootViewController: LogInVC())
-//            let navigation = UINavigationController(rootViewController: MainTabBar())
-
             navigation.modalPresentationStyle = .fullScreen
             navigation.navigationBar.isHidden = true
             strongSelf.present(navigation, animated: false, completion: nil)
         }
     }
+    
 }

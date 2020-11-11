@@ -11,20 +11,11 @@ class MyPageVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let versionLabel = UILabel()
-    public lazy var usernameInfoField = CustomView().informationField(
-                    labelText: "username", textFieldText: " ")
-    public lazy var emailInfoField = CustomView().informationField(
-                    labelText: "email", textFieldText: " ")
-    public lazy var addressInfoField = CustomView().informationField(
-                    labelText: "address", textFieldText: " ",
-                    action: #selector(changeAddress), target: self)
-    public lazy var cardInfoField = CustomView().informationField(
-                    labelText: "card", textFieldText: "**** **** **** 1234",
-                    action: #selector(changeCreditCard), target: self)
-    public lazy var phoneInfoField = CustomView().informationField(
-                    labelText: "phone", textFieldText: "000 000 0000",
-                    action: #selector(changePhone), target: self)
-    
+    public lazy var usernameInfoField = CustomView().informationField(labelText: "username", textFieldText: " ")
+    public lazy var emailInfoField = CustomView().informationField(labelText: "email", textFieldText: " ")
+    public lazy var addressInfoField = CustomView().informationField(labelText: "address", textFieldText: " ", action: #selector(changeAddress), target: self)
+    public lazy var cardInfoField = CustomView().informationField(labelText: "card", textFieldText: "**** **** **** 1234", action: #selector(changeCreditCard), target: self)
+    public lazy var phoneInfoField = CustomView().informationField(labelText: "phone", textFieldText: "000 000 0000", action: #selector(changePhone), target: self)
     private lazy var notificationView = CustomView().notificationView()
     private let msgNotificationSwitch = UISwitch()
     private let msgNotificationLabel = UILabel()
@@ -32,7 +23,7 @@ class MyPageVC: UIViewController {
     // MARK:- Properties
     private lazy var viewModel = MyPageVM(self)
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override func viewDidLoad() {
         configureView()
         configureUI()
@@ -129,28 +120,8 @@ class MyPageVC: UIViewController {
             make.right.equalTo(msgNotificationSwitch.snp.left).offset(-8)
         }
     }
-
-    @objc func changePhone() {
-        pushVC(ChangePhoneVC())
-    }
     
-    @objc func changeAddress() {
-        pushVC(ChangeAddresssVC())
-    }
-    
-    @objc func changeCreditCard() {
-        pushVC(ChangeCardVC())
-    }
-    
-    @objc func toggleSwitch() {
-        if msgNotificationSwitch.isOn {
-            presentNotification()
-            msgNotificationLabel.text = "We will send you msg when your\ndelivery status gets updated! 👍🏼"
-        } else {
-            msgNotificationLabel.text = "Do you want to get notified with message\nabout delivery status?"
-        }
-    }
-    
+    // MARK:- Helpers
     func presentNotification() {
         msgNotificationSwitch.isUserInteractionEnabled = false
         view.addSubview(notificationView)
@@ -182,6 +153,28 @@ class MyPageVC: UIViewController {
                 strongSelf.msgNotificationSwitch.isUserInteractionEnabled = true
             })}
         })
+    }
+    
+    // MARK:- Selectors
+    @objc func changePhone() {
+        pushVC(ChangePhoneVC())
+    }
+    
+    @objc func changeAddress() {
+        pushVC(ChangeAddresssVC())
+    }
+    
+    @objc func changeCreditCard() {
+        pushVC(ChangeCardVC())
+    }
+    
+    @objc func toggleSwitch() {
+        if msgNotificationSwitch.isOn {
+            presentNotification()
+            msgNotificationLabel.text = "We will send you msg when your\ndelivery status gets updated! 👍🏼"
+        } else {
+            msgNotificationLabel.text = "Do you want to get notified with message\nabout delivery status?"
+        }
     }
 
 }

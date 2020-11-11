@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 protocol OrderHistoryDelegate: class {
     func orderTapped(index: Int)
 }
@@ -14,14 +15,14 @@ class OrderHistoryCVC: UICollectionViewController {
     // MARK:- Properties
     private lazy var viewModel  = OrderVM(self)
     weak var delegate: OrderHistoryDelegate?
+    private let reuseIdentifier = "orderHistoryCell"
     public var orders = [Order]() {
         didSet {
             collectionView.reloadData()
         }
     }
-    private let reuseIdentifier = "orderHistoryCell"
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override init(collectionViewLayout layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         let myLayout = UICollectionViewFlowLayout()
         myLayout.scrollDirection = .vertical
@@ -46,6 +47,7 @@ class OrderHistoryCVC: UICollectionViewController {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         collectionView.register(OrderHistoryCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
+    
 }
 
 // MARK:- Extentions
@@ -65,11 +67,12 @@ extension OrderHistoryCVC: UICollectionViewDelegateFlowLayout {
         
         cell.status = viewModel.randomStatus()
         cell.viewModel.filterValues(product: orders[indexPath.row].product)
-//        cell.delegate = delegate
 
         return cell
     }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.orderTapped(index: indexPath.row)
     }
+    
 }

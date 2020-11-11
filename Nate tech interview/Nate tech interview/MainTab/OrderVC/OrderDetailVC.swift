@@ -31,7 +31,7 @@ class OrderDetailVC: UIViewController {
 
     private var originalBannerTransform: CATransform3D?
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     init(product: API.ProductResponse) {
         self.product = product
         super.init(nibName: nil, bundle: nil)
@@ -43,12 +43,12 @@ class OrderDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
-        configureConstraints()
+        configureView()
+        configureUI()
     }
     
     // MARK:- Configures
-    private func configure() {
+    private func configureView() {
         view.backgroundColor = .white
         scrollView.delegate = self
         viewModel.filterValues(product: product)
@@ -63,7 +63,7 @@ class OrderDetailVC: UIViewController {
         }
     }
     
-    private func configureConstraints() {
+    private func configureUI() {
         view.addSubview(backButton)
         backButton.setImage(UIImage(named: "arrow-left"), for: .normal)
         backButton.addTarget(self, action: #selector(popVC), for: .touchUpInside)
@@ -114,6 +114,7 @@ class OrderDetailVC: UIViewController {
         }
     }
     
+    // MARK:- Helpers
     func purchasedButtonTapped() {
         view.isUserInteractionEnabled = false
         view.addSubview(notificationView)
@@ -161,6 +162,7 @@ class OrderDetailVC: UIViewController {
 
 }
 
+// MARK:- Extension
 extension OrderDetailVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let originalBannerTransform = originalBannerTransform
@@ -187,4 +189,5 @@ extension OrderDetailVC: UIScrollViewDelegate {
             productImagePVC.view.layer.transform = imageTransform
         }
     }
+    
 }

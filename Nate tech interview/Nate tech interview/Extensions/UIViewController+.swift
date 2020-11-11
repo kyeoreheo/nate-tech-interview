@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    //MARK:- Navigation
+    // MARK:- Navigation
     func pushVC(_ viewController: UIViewController, animated: Bool = true) {
         navigationController?.pushViewController(viewController, animated: animated)
     }

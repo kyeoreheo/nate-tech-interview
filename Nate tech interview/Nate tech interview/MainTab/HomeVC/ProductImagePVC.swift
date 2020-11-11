@@ -10,16 +10,16 @@ import UIKit
 class ProductImagePVC: UIPageViewController {
     // MARK:- Properties
     private lazy var viewModel = HomeVM(self)
+    var pages = [UIViewController]()
+    let pageControl = UIPageControl()
+    let placeHolderImage = UIImageView()
     var imageStringURLs = [String]() {
         didSet {
             viewModel.generatePages()
         }
     }
-    var pages = [UIViewController]()
-    let pageControl = UIPageControl()
-    public let placeHolderImage = UIImageView()
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     init() {
         super.init(transitionStyle: .scroll,
               navigationOrientation: .horizontal,
@@ -60,6 +60,7 @@ class ProductImagePVC: UIPageViewController {
             make.top.left.bottom.right.equalToSuperview()
         }
     }
+    
 }
 
 // MARK:- Extension
@@ -84,4 +85,5 @@ extension ProductImagePVC : UIPageViewControllerDataSource, UIPageViewController
         let pageContentViewController = pageViewController.viewControllers![0]
         self.pageControl.currentPage = pages.firstIndex(of: pageContentViewController)!
     }
+    
 }

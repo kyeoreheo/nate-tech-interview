@@ -11,30 +11,18 @@ class ChangeAddresssVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let backButton = UIButton()
-    lazy var confirmButton = CustomView().generalButton(isActive: false,
-                                     target: self, action: #selector(applyChanges))
-    private lazy var streetTextField = CustomView().textField(placeHolder: "street",
-                                     target: self,
-                                     action: #selector(streetTextFieldDidChange),
-                                     type: .address)
-    private lazy var cityTextField = CustomView().textField(placeHolder: "city",
-                                     target: self,
-                                     action: #selector(cityTextFieldDidChange),
-                                     type: .address)
-    private lazy var stateTextField = CustomView().textField(placeHolder: "state",
-                                     target: self,
-                                     action: #selector(stateTextFieldDidChange),
-                                     type: .address)
-    private lazy var zipcodeTextField = CustomView().textField(placeHolder: "zipcode",
-                                     target: self,
-                                     action: #selector(zipcodeTextFieldDidChange),
-                                     type: .phone)
-    var address = Address(street: "", city: "", state: "", zipcode: "")
-    private var buttonConstraint: NSLayoutConstraint?
+    lazy var confirmButton = CustomView().generalButton(isActive: false, target: self, action: #selector(applyChanges))
+    private lazy var streetTextField = CustomView().textField(placeHolder: "street", target: self, action: #selector(streetTextFieldDidChange), type: .address)
+    private lazy var cityTextField = CustomView().textField(placeHolder: "city", target: self, action: #selector(cityTextFieldDidChange), type: .address)
+    private lazy var stateTextField = CustomView().textField(placeHolder: "state", target: self, action: #selector(stateTextFieldDidChange), type: .address)
+    private lazy var zipcodeTextField = CustomView().textField(placeHolder: "zipcode", target: self, action: #selector(zipcodeTextFieldDidChange), type: .phone)
 
     // MARK:- Properties
     private lazy var viewModel = MyPageVM(self)
+    private var buttonConstraint: NSLayoutConstraint?
+    var address = Address(street: "", city: "", state: "", zipcode: "")
     
+    // MARK:- Lifecycles
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,7 +31,7 @@ class ChangeAddresssVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override func viewDidLoad() {
         view.backgroundColor = .white
         subscribeToShowKeyboardNotifications()
@@ -118,6 +106,7 @@ class ChangeAddresssVC: UIViewController {
 
     }
     
+    // MARK:- Selector
     @objc func streetTextFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         address.street = text
@@ -158,7 +147,6 @@ class ChangeAddresssVC: UIViewController {
     }
     
     @objc func applyChanges() {
-//        User.shared.setAddress(address)
         API.changeAddresss(address: address) { [weak self] error, ref in
             guard let stongSelf = self else { return }
             if error == nil {
@@ -167,7 +155,7 @@ class ChangeAddresssVC: UIViewController {
         }
     }
     
-    //MARK:- Keyboard
+    // MARK:- Keyboard
     @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
@@ -206,4 +194,5 @@ class ChangeAddresssVC: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
+    
 }

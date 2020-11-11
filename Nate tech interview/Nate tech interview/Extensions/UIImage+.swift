@@ -32,4 +32,5 @@ extension UIImage {
             self.draw(in:CGRect(origin:origin, size:sz))
         }
     }
+    
 }

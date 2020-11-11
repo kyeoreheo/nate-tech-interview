@@ -56,5 +56,6 @@ class AuthenticationVM {
             vc.logInButton.isEnabled = false
         }
     }
+
 }
 

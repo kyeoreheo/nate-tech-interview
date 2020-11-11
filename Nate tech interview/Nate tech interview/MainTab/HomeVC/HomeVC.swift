@@ -22,18 +22,14 @@ class HomeVC: UIViewController {
         }
     }
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override func viewDidLoad() {
-        configure()
+        configureView()
         configureUI()
-        API.registerUser(user: AuthProperties(email: "91kyoheo@gmail.com", password: "123456", username: "Kyo")) { error, ref in
-            print("DEBUG:- \(ref), error \(error)")
-            
-        }
     }
     
     // MARK:- Configures
-    private func configure() {
+    private func configureView() {
         view.backgroundColor = .white
         viewModel.getProducts()
     }
@@ -59,6 +55,7 @@ class HomeVC: UIViewController {
             
 }
 
+// MARK:- Extension
 extension HomeVC: ProductCellDelegate {
     func purchasedButtonTapped(completion: @escaping (Bool?) -> Void) {
         view.isUserInteractionEnabled = false
@@ -93,4 +90,5 @@ extension HomeVC: ProductCellDelegate {
             })}
         })
     }
+    
 }

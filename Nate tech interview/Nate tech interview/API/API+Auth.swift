@@ -52,7 +52,6 @@ struct AuthProperties {
 
 extension API {
     static func registerUser(user: AuthProperties, completion: @escaping(Error?, DatabaseReference?) -> Void ) {
-
         let filename = NSUUID().uuidString
         Auth.auth().createUser(withEmail: user.email, password: user.password) { result, error in
             if let error = error {
@@ -62,7 +61,6 @@ extension API {
             }
 
             guard let uid = result?.user.uid else { return }
-
             let values = ["email": user.email,
                           "username": user.username,
                           "address": ["street" : "",
@@ -121,4 +119,5 @@ extension API {
             print(error.localizedDescription)
         }
     }
+    
 }
