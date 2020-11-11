@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MyPageVM {
     private let viewController: Any
@@ -72,11 +73,20 @@ class MyPageVM {
               let phone = vc.phoneInfoField.viewWithTag(1) as? UILabel
         else { return }
         
-        username.text = User.shared.name
-        email.text = User.shared.email
-        address.text = User.shared.addresToString()
-        card.text = User.shared.card.number
-        phone.text = User.shared.phone
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        API.fetchUser(uid: uid) { response in
+            User.shared.setName(response.username)
+            User.shared.setEmail(response.email)
+            User.shared.setAddress(response.address)
+            User.shared.setCard(Card(number: response.card.number, cvv: ""))
+            User.shared.setPhone(response.phoneNumber)
+            
+            username.text = User.shared.name
+            email.text = User.shared.email
+            address.text = User.shared.addresToString()
+            card.text = User.shared.card.number
+            phone.text = User.shared.phone
+        }
     }
    
 }

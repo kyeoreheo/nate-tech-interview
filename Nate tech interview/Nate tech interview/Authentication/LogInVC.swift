@@ -12,12 +12,9 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
     private let titleLabel = UILabel()
     lazy var emailTextField = CustomView().textField(placeHolder: "Email", target: self, action: #selector(emailTextFieldDidChange), type: .email)
     lazy var passwordTextField = CustomView().textField(placeHolder: "Password", target: self, action: #selector(passwordTextFieldDidchange), type: .password, buttonAction: #selector(toggleEyeButton))
-    private lazy var signInButton = CustomView().generalButton(isActive: false,text: "Log In", target: self, action: #selector(logInButton))
     
-    
-    lazy var confirmButton = CustomView().generalButton(isActive: false,
-                                     target: self, action: #selector(logInButton))
-    private let warningLabel = UILabel()
+    lazy var logInButton = CustomView().generalButton(isActive: false, text: "Log In", target: self, action: #selector(logIn))
+    let warningLabel = UILabel()
     private let rememberMeButton = UIButton()
     private let rememberMeLabel = UILabel()
     private let forgotPasswordButton = UIButton()
@@ -27,38 +24,28 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
     
     //MARK:- Properties
     private lazy var viewModel = AuthenticationVM(self)
-    private var email = ""
-    private var password = ""
+    var email = ""
+    var password = ""
     private var isPasswodHideen = true
-    
-//    private var buttonConstraint: NSLayoutConstraint?
-    
+    private var buttonConstraint: NSLayoutConstraint?
+
     //MARK:- LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         configureUI()
-        //check already login or not
     }
     
     override func viewWillAppear(_ animated: Bool) {
         subscribeToShowKeyboardNotifications()
-//        view.layoutIfNeeded()
-//        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        isInAuthenticationView = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        isInAuthenticationView = false
         deregisterFromKeyboardNotifications()
     }
     
     //MARK:- configure
     private func configureView() {
-        //viewModel.hideGuideOnKeyboard()
         view.backgroundColor = .white
         warningLabel.isHidden = true
     }
@@ -104,7 +91,6 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
         rememberMeButton.layer.cornerRadius = 5
         rememberMeButton.layer.borderWidth = 1.5
         rememberMeButton.layer.borderColor = UIColor.gray5.cgColor
-        rememberMeButton.addTarget(self, action: #selector(notReadyYetButton), for: .touchUpInside)
         rememberMeButton.snp.makeConstraints { make in
             make.width.height.equalTo(20)
             make.top.equalTo(passwordTextField.snp.bottom).offset(40)
@@ -133,7 +119,6 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
 
         view.addSubview(forgotPasswordButton)
         forgotPasswordButton.backgroundColor = .white
-        forgotPasswordButton.addTarget(self, action: #selector(notReadyYetButton), for: .touchUpInside)
         forgotPasswordButton.setTitle("Forgot password", for: .normal)
         forgotPasswordButton.titleLabel?.underline()
         forgotPasswordButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12 * ratio)
@@ -175,51 +160,28 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
             make.centerY.equalTo(signUpLabel.snp.centerY)
         }
         
-//        view.addSubview(signInButton)
-//        buttonConstraint = signInButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-//        buttonConstraint?.isActive = true
-//        signInButton.snp.makeConstraints { make in
-//            make.height.equalTo(56 * ratio)
-//            make.left.equalToSuperview().offset(24)
-//            make.right.equalToSuperview().offset(-24)
-//            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-16)
-//        }
-        
-        view.addSubview(confirmButton)
-        buttonConstraint = confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        view.addSubview(logInButton)
+        buttonConstraint = logInButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         buttonConstraint?.isActive = true
-        confirmButton.snp.makeConstraints { make in
+        logInButton.snp.makeConstraints { make in
             make.height.equalTo(56 * ratio)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-16)
         }
-        
     }
 
     //MARK:- Selectors
     @objc func emailTextFieldDidChange(_ textField: UITextField) {
         guard let email = textField.text else { return }
         self.email = email
-        warningLabel.isHidden = true
-        if email != "" && password != "" {
-            signInButton.backgroundColor = .orange
-        } else {
-            signInButton.backgroundColor = .lightGray
-        }
-
+        viewModel.checkLogInFormat()
     }
     
     @objc func passwordTextFieldDidchange(_ textField: UITextField) {
         guard let password = textField.text else { return }
         self.password = password
-        warningLabel.isHidden = true
-        if email != "" && password != "" {
-            signInButton.backgroundColor = .orange
-        } else {
-            signInButton.backgroundColor = .lightGray
-        }
-
+        viewModel.checkLogInFormat()
     }
     
     @objc func toggleEyeButton() {
@@ -237,43 +199,85 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc func notReadyYetButton() {
-        print("DEBUG:- Not ready")
-    }
-    
-    @objc func logInButton() {
+    @objc func logIn() {
         let lowerCaseEmail = email.lowercased()
         
-//        if email != "" && password != "" {
-//            API.logIn(email: lowerCaseEmail, password: password) { [weak self] (result, error) in
-//                guard let strongSelf = self else { return }
-//                if let error = error {
-//                    strongSelf.warningLabel.isHidden = false
-//                    strongSelf.warningLabel.text = error.localizedDescription
-//                    return
-//                }
-//
-//                guard let result = result else { return }
-//                API.fetchUser(uid: result.user.uid) { response in
-//                    User.shared.email = response.email
-//                    User.shared.firstName = response.firstName
-//                    User.shared.lastName = response.lastName
-//                    User.shared.favorite = response.favorite
-//                    User.shared.purchased = response.purchased
-//                    User.shared.profileImage = response.profileImageUrl
-//
-//                    DispatchQueue.main.async {
-//                        let navigation = UINavigationController(rootViewController: MainTabBar.shared)
-//                        navigation.modalPresentationStyle = .fullScreen
-//                        navigation.navigationBar.isHidden = true
-//                        strongSelf.present(navigation, animated: false, completion: nil)
-//                    }
-//                }
-//            }
-//        }
+        if email != "" && password != "" {
+            API.logIn(email: lowerCaseEmail, password: password) { [weak self] (result, error) in
+                guard let strongSelf = self,
+                      let emailTextField = strongSelf.emailTextField.viewWithTag(1) as? UITextField,
+                      let passwordTextField = strongSelf.passwordTextField.viewWithTag(1) as? UITextField
+                else { return }
+                
+                emailTextField.resignFirstResponder()
+                passwordTextField.resignFirstResponder()
+                
+                if let error = error {
+                    strongSelf.warningLabel.isHidden = false
+                    strongSelf.warningLabel.text = error.localizedDescription
+                    return
+                }
+
+                guard let result = result else { return }
+                API.fetchUser(uid: result.user.uid) { response in
+                    User.shared.setName(response.username)
+                    User.shared.setEmail(response.email)
+                    User.shared.setAddress(response.address)
+                    User.shared.setCard(Card(number: response.card.number, cvv: ""))
+                    User.shared.setPhone(response.phoneNumber)
+                    
+                    DispatchQueue.main.async {
+                        let navigation = UINavigationController(rootViewController: MainTabBar())
+                        navigation.modalPresentationStyle = .fullScreen
+                        navigation.navigationBar.isHidden = true
+                        strongSelf.present(navigation, animated: false, completion: nil)
+                    }
+                }
+            }
+        }
     }
     
     @objc func presentSignUpVC() {
         navigationController?.pushViewController(SignUpVC(), animated: true)
+    }
+    
+    //MARK:- Keyboard
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        buttonConstraint?.constant = (isBigPhone ? 50 + 8 : 16 + 16) - keyboardSize.cgRectValue.height - 48
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+       
+    @objc func keyboardWillHide(_ notification: Notification) {
+        buttonConstraint?.constant = 0
+        let userInfo = notification.userInfo
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func subscribeToShowKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
+    func deregisterFromKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
 }

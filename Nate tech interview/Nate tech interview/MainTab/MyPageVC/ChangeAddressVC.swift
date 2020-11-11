@@ -30,6 +30,8 @@ class ChangeAddresssVC: UIViewController {
                                      action: #selector(zipcodeTextFieldDidChange),
                                      type: .phone)
     var address = Address(street: "", city: "", state: "", zipcode: "")
+    private var buttonConstraint: NSLayoutConstraint?
+
     // MARK:- Properties
     private lazy var viewModel = MyPageVM(self)
     
@@ -44,14 +46,11 @@ class ChangeAddresssVC: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         view.backgroundColor = .white
+        subscribeToShowKeyboardNotifications()
         configureUI()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        subscribeToShowKeyboardNotifications()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
+
+    override func viewWillDisappear(_ animated: Bool) {
         deregisterFromKeyboardNotifications()
     }
 
@@ -159,7 +158,52 @@ class ChangeAddresssVC: UIViewController {
     }
     
     @objc func applyChanges() {
-        User.shared.setAddress(address)
-        popVC()
+//        User.shared.setAddress(address)
+        API.changeAddresss(address: address) { [weak self] error, ref in
+            guard let stongSelf = self else { return }
+            if error == nil {
+                stongSelf.popVC()
+            }
+        }
+    }
+    
+    //MARK:- Keyboard
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        buttonConstraint?.constant = (isBigPhone ? 50 + 8 : 16 + 16) - keyboardSize.cgRectValue.height
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+       
+    @objc func keyboardWillHide(_ notification: Notification) {
+        buttonConstraint?.constant = 0
+        let userInfo = notification.userInfo
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func subscribeToShowKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
+    func deregisterFromKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
 }

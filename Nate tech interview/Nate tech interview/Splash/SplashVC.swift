@@ -73,7 +73,6 @@ class SplashVC: UIViewController {
         ratio = heightRatio < 1 ? 1:heightRatio
         isBigPhone = view.frame.height > 750.0
         topSafeMargin = ( UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.top ?? 0) as CGFloat
-        bottomSafeMargin = (UIApplication.shared.windows.first{$0.isKeyWindow}?.safeAreaInsets.bottom ?? 0) as CGFloat
     }
     
     private func presentMainTabBar() {
@@ -94,7 +93,7 @@ class SplashVC: UIViewController {
 
             navigation.modalPresentationStyle = .fullScreen
             navigation.navigationBar.isHidden = true
-            strongSelf.present(navigation, animated: true, completion: nil)
+            strongSelf.present(navigation, animated: false, completion: nil)
         }
     }
 }
