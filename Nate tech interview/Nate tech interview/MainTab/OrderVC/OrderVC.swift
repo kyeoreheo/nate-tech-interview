@@ -20,7 +20,7 @@ class OrderVC: UIViewController {
         }
     }
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override func viewDidLoad() {
         configure()
         configureUI()
@@ -29,6 +29,7 @@ class OrderVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         viewModel.getProducts()
     }
+    
     // MARK:- Configures
     private func configure() {
         view.backgroundColor = .white
@@ -54,6 +55,7 @@ class OrderVC: UIViewController {
     }
 }
 
+// MARK:- Extension
 extension OrderVC: OrderHistoryDelegate {
     func orderTapped(index: Int) {
         pushVC(OrderDetailVC(product: orders[index].product))

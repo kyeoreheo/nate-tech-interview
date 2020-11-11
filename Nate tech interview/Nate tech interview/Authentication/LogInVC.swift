@@ -8,11 +8,10 @@
 import UIKit
 
 class LogInVC: UIViewController, UIGestureRecognizerDelegate {
-    //MARK:- View Components
+    // MARK:- View Components
     private let titleLabel = UILabel()
     lazy var emailTextField = CustomView().textField(placeHolder: "Email", target: self, action: #selector(emailTextFieldDidChange), type: .email)
     lazy var passwordTextField = CustomView().textField(placeHolder: "Password", target: self, action: #selector(passwordTextFieldDidchange), type: .password, buttonAction: #selector(toggleEyeButton))
-    
     lazy var logInButton = CustomView().generalButton(isActive: false, text: "Log In", target: self, action: #selector(logIn))
     let warningLabel = UILabel()
     private let rememberMeButton = UIButton()
@@ -22,14 +21,14 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
     private let signUpLabel = UILabel()
     private let signUpButton = UIButton()
     
-    //MARK:- Properties
+    // MARK:- Properties
     private lazy var viewModel = AuthenticationVM(self)
-    var email = ""
-    var password = ""
     private var isPasswodHideen = true
     private var buttonConstraint: NSLayoutConstraint?
+    var email = ""
+    var password = ""
 
-    //MARK:- LifeCycles
+    // MARK:- LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -44,7 +43,7 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
         deregisterFromKeyboardNotifications()
     }
     
-    //MARK:- configure
+    // MARK:- Configures
     private func configureView() {
         view.backgroundColor = .white
         warningLabel.isHidden = true
@@ -171,7 +170,7 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    //MARK:- Selectors
+    // MARK:- Selectors
     @objc func emailTextFieldDidChange(_ textField: UITextField) {
         guard let email = textField.text else { return }
         self.email = email
@@ -241,7 +240,7 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
         navigationController?.pushViewController(SignUpVC(), animated: true)
     }
     
-    //MARK:- Keyboard
+    // MARK:- Keyboard
     @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
@@ -280,4 +279,5 @@ class LogInVC: UIViewController, UIGestureRecognizerDelegate {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
+    
 }

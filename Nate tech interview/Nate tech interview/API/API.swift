@@ -5,7 +5,6 @@
 //  Created by Kyo on 11/6/20.
 //
 
-import Alamofire
 import Firebase
 
 let DB_REF = Database.database().reference()

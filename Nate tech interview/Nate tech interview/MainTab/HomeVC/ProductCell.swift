@@ -12,7 +12,7 @@ protocol ProductCellDelegate: class {
 }
 
 class ProductCell: UICollectionViewCell {
-    // MARK:- ViewComponents
+    // MARK:- View components
     public let productImagePVC = ProductImagePVC()
     public let productNameLable = UILabel()
     public let popUpMerchantLabel = UILabel()
@@ -32,7 +32,7 @@ class ProductCell: UICollectionViewCell {
     private var isDetailOn = false
     public var product: API.ProductResponse?
 
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
@@ -151,6 +151,7 @@ class ProductCell: UICollectionViewCell {
         }
     }
     
+    // MARK:- Helpers
     override func prepareForReuse() {
         visualEffectView.alpha = 0
         popUpFrame.alpha = 0
@@ -163,6 +164,7 @@ class ProductCell: UICollectionViewCell {
         }
     }
     
+    // MARK:- Selectors
     @objc func displayDetail() {
         popUpProductName.text = productNameLable.text
         if isDetailOn {
@@ -189,7 +191,6 @@ class ProductCell: UICollectionViewCell {
     }
     
     @objc func purchaseItem() {
-        //User.shared.addOrder(API.ProductResponse(id: "", title: "", images: <#T##[String]#>, url: <#T##String#>, merchant: <#T##String#>, createdAt: <#T##String#>))
         guard let product = product else { return }
         User.shared.addOrder(product)
         delegate?.purchasedButtonTapped { [weak self] finished in
@@ -200,4 +201,5 @@ class ProductCell: UICollectionViewCell {
             }
         }
     }
+    
 }

@@ -10,14 +10,14 @@ import UIKit
 class ProductFeedCVC: UICollectionViewController {
     // MARK:- Properties
     weak var delegate: ProductCellDelegate?
+    private let reuseIdentifier = "productCell"
     public var products = [API.ProductResponse]() {
         didSet {
             collectionView.reloadData()
         }
     }
-    private let reuseIdentifier = "productCell"
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override init(collectionViewLayout layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         let myLayout = UICollectionViewFlowLayout()
         myLayout.scrollDirection = .vertical
@@ -70,4 +70,5 @@ extension ProductFeedCVC: UICollectionViewDelegateFlowLayout {
 
         return cell
     }
+    
 }

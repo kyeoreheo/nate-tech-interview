@@ -12,16 +12,13 @@ class ChangePhoneVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let backButton = UIButton()
-    lazy var confirmButton = CustomView().generalButton(isActive: false,
-                                     target: self, action: #selector(applyChanges))
-    private lazy var phoneNumberTextField = CustomView().textField(placeHolder: "phone number",
-                                     target: self,
-                                     action: #selector(cardNumberTextFieldDidChange),
-                                     type: .phone)
+    lazy var confirmButton = CustomView().generalButton(isActive: false, target: self, action: #selector(applyChanges))
+    private lazy var phoneNumberTextField = CustomView().textField(placeHolder: "phone number", target: self, action: #selector(cardNumberTextFieldDidChange), type: .phone)
+    
     // MARK:- Properties
     private lazy var viewModel = MyPageVM(self)
-    var phoneNumber = ""
     private var buttonConstraint: NSLayoutConstraint?
+    var phoneNumber = ""
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -31,7 +28,7 @@ class ChangePhoneVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override func viewDidLoad() {
         view.backgroundColor = .white
         subscribeToShowKeyboardNotifications()
@@ -81,6 +78,7 @@ class ChangePhoneVC: UIViewController {
         }
     }
     
+    // MARK:- Selectors
     @objc func cardNumberTextFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if text.count > 12 {
@@ -105,7 +103,7 @@ class ChangePhoneVC: UIViewController {
         }
     }
     
-    //MARK:- Keyboard
+    // MARK:- Keyboard
     @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
@@ -144,4 +142,5 @@ class ChangePhoneVC: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
+    
 }

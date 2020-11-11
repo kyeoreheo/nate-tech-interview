@@ -10,7 +10,7 @@ import SnapKit
 import Firebase
 
 class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
-    //MARK:- Propertiess
+    // MARK:- View components
     private let backButton = UIButton()
     private let titleLabel = UILabel()
     private lazy var usernameTextField = CustomView().textField(placeHolder: "Username", target: self, action: #selector(usernameTextFieldDidhange), type: .name)
@@ -21,14 +21,15 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
     
     private lazy var popUpModal = CustomView().popUpModal(message: "Registered!", buttonText: "Log In", action: #selector(popVC), target: self)
 
+    // MARK:- Properties
+    private var isPasswodHideen = true
+    private var buttonConstraint: NSLayoutConstraint?
     private lazy var viewModel = AuthenticationVM(self)
     var email = ""
     var password = ""
     var username = ""
-    private var isPasswodHideen = true
-    private var buttonConstraint: NSLayoutConstraint?
 
-    //MARK:- LifeCycles
+    // MARK:- LifeCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -43,7 +44,7 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
         deregisterFromKeyboardNotifications()
     }
     
-    //MARK:- Helpers
+    // MARK:- Configures
     private func configure() {
         view.backgroundColor = .white
         warningLabel.isHidden = true
@@ -118,6 +119,7 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    // MARK:- Selectors
     @objc func registerUser() {
         let lowerCaseEmail = email.lowercased()
         let user = AuthProperties(email: lowerCaseEmail, password: password, username: username)
@@ -141,7 +143,6 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    //MARK:- Selectors
     @objc func emailTextFieldDidChange(_ textField: UITextField) {
         guard let email = textField.text else { return }
         self.email = email
@@ -175,7 +176,7 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    //MARK:- Keyboard
+    // MARK:- Keyboard
     @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
@@ -214,5 +215,5 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
+    
 }
-

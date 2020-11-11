@@ -81,4 +81,5 @@ class HomeVM {
         vc.setViewControllers([vc.pages[0]], direction: .forward, animated: false)
         vc.pageControl.numberOfPages = vc.pages.count
     }
+    
 }

@@ -9,13 +9,13 @@ import UIKit
 import SDWebImage
 
 class ProductImage: UIViewController  {
-    // MARK:- ViewComponents
+    // MARK:- View components
     var imageView =  UIImageView()
     
     // MARK:- Properties
     private var imageURL: URL?
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     convenience init(urlString: String) {
         self.init(nibName:nil, bundle:nil)
         guard let url = URL(string: urlString) else { return }
@@ -37,4 +37,5 @@ class ProductImage: UIViewController  {
             make.top.left.bottom.right.equalToSuperview()
         }
     }
+    
 }

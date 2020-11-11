@@ -11,7 +11,7 @@ class MainTabBar: UITabBarController, UITabBarControllerDelegate {
     // MARK:- Properties
     private let viewModel = MainTabVM()
     
-    // MARK: - Lifecycle
+    // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.delegate = self
@@ -34,4 +34,5 @@ class MainTabBar: UITabBarController, UITabBarControllerDelegate {
         
         viewControllers = [homeTab, orderTab, myPageTab]
     }
+    
 }

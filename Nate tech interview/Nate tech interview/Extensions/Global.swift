@@ -9,7 +9,6 @@ import UIKit
 
 var ratio: CGFloat = 0
 var isBigPhone = false
-var bottomSafeMargin: CGFloat = 0
 var topSafeMargin: CGFloat = 0
 
 enum TextFieldType {

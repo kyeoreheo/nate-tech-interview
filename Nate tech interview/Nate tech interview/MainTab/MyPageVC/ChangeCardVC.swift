@@ -11,21 +11,15 @@ class ChangeCardVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let backButton = UIButton()
-    lazy var confirmButton = CustomView().generalButton(isActive: false,
-                                     target: self, action: #selector(applyChanges))
-    private lazy var cardNumberTextField = CustomView().textField(placeHolder: "card number",
-                                     target: self,
-                                     action: #selector(cardNumberTextFieldDidChange),
-                                     type: .phone)
-    private lazy var cvvTextField = CustomView().textField(placeHolder: "cvv",
-                                     target: self,
-                                     action: #selector(cvvTextFieldDidChange),
-                                     type: .phone)
+    lazy var confirmButton = CustomView().generalButton(isActive: false, target: self, action: #selector(applyChanges))
+    private lazy var cardNumberTextField = CustomView().textField(placeHolder: "card number", target: self, action: #selector(cardNumberTextFieldDidChange), type: .phone)
+    private lazy var cvvTextField = CustomView().textField(placeHolder: "cvv", target: self, action: #selector(cvvTextFieldDidChange), type: .phone)
+   
     // MARK:- Properties
     private lazy var viewModel = MyPageVM(self)
+    private var buttonConstraint: NSLayoutConstraint?
     var cardNumber = ""
     var cvv = ""
-    private var buttonConstraint: NSLayoutConstraint?
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +29,7 @@ class ChangeCardVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK:- Lifecycle
+    // MARK:- Lifecycles
     override func viewDidLoad() {
         view.backgroundColor = .white
         subscribeToShowKeyboardNotifications()
@@ -91,9 +85,9 @@ class ChangeCardVC: UIViewController {
             make.right.equalToSuperview().offset(-24)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-16)
         }
-
     }
     
+    // MARK:- Selectors
     @objc func cardNumberTextFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         
@@ -122,8 +116,6 @@ class ChangeCardVC: UIViewController {
     }
     
     @objc func applyChanges() {
-//        User.shared.setCard(Card(number: cardNumber, cvv: cvv))
-//        popVC()
         API.changeCard(cardNumber: cardNumber) { [weak self] error, ref in
             guard let stongSelf = self else { return }
             if error == nil {
@@ -132,7 +124,7 @@ class ChangeCardVC: UIViewController {
         }
     }
     
-    //MARK:- Keyboard
+    // MARK:- Keyboard
     @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
@@ -171,4 +163,5 @@ class ChangeCardVC: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
+    
 }
