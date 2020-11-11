@@ -12,16 +12,17 @@ class ChangePhoneVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let backButton = UIButton()
-    lazy var confirmButton = viewModel.generalButton(isActive: false,
+    lazy var confirmButton = CustomView().generalButton(isActive: false,
                                      target: self, action: #selector(applyChanges))
-    private lazy var phoneNumberTextField = viewModel.textField(placeHolder: "card number",
+    private lazy var phoneNumberTextField = CustomView().textField(placeHolder: "phone number",
                                      target: self,
                                      action: #selector(cardNumberTextFieldDidChange),
                                      type: .phone)
     // MARK:- Properties
     private lazy var viewModel = MyPageVM(self)
     var phoneNumber = ""
-    
+    private var buttonConstraint: NSLayoutConstraint?
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,13 +34,10 @@ class ChangePhoneVC: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         view.backgroundColor = .white
+        subscribeToShowKeyboardNotifications()
         configureUI()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        subscribeToShowKeyboardNotifications()
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         deregisterFromKeyboardNotifications()
     }
@@ -99,7 +97,51 @@ class ChangePhoneVC: UIViewController {
     }
 
     @objc func applyChanges() {
-        User.shared.setPhone(phoneNumber)
-        popVC()
+        API.changePhoneNumber(phoneNumber: phoneNumber) { [weak self] error, ref in
+            guard let stongSelf = self else { return }
+            if error == nil {
+                stongSelf.popVC()
+            }
+        }
+    }
+    
+    //MARK:- Keyboard
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        buttonConstraint?.constant = (isBigPhone ? 50 + 8 : 16 + 16) - keyboardSize.cgRectValue.height
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+       
+    @objc func keyboardWillHide(_ notification: Notification) {
+        buttonConstraint?.constant = 0
+        let userInfo = notification.userInfo
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func subscribeToShowKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
+    func deregisterFromKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
 }

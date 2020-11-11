@@ -11,13 +11,13 @@ class ChangeCardVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let backButton = UIButton()
-    lazy var confirmButton = viewModel.generalButton(isActive: false,
+    lazy var confirmButton = CustomView().generalButton(isActive: false,
                                      target: self, action: #selector(applyChanges))
-    private lazy var cardNumberTextField = viewModel.textField(placeHolder: "card number",
+    private lazy var cardNumberTextField = CustomView().textField(placeHolder: "card number",
                                      target: self,
                                      action: #selector(cardNumberTextFieldDidChange),
                                      type: .phone)
-    private lazy var cvvTextField = viewModel.textField(placeHolder: "cvv",
+    private lazy var cvvTextField = CustomView().textField(placeHolder: "cvv",
                                      target: self,
                                      action: #selector(cvvTextFieldDidChange),
                                      type: .phone)
@@ -25,7 +25,8 @@ class ChangeCardVC: UIViewController {
     private lazy var viewModel = MyPageVM(self)
     var cardNumber = ""
     var cvv = ""
-    
+    private var buttonConstraint: NSLayoutConstraint?
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,13 +38,10 @@ class ChangeCardVC: UIViewController {
     // MARK:- Lifecycle
     override func viewDidLoad() {
         view.backgroundColor = .white
+        subscribeToShowKeyboardNotifications()
         configureUI()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        subscribeToShowKeyboardNotifications()
-    }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         deregisterFromKeyboardNotifications()
     }
@@ -124,7 +122,53 @@ class ChangeCardVC: UIViewController {
     }
     
     @objc func applyChanges() {
-        User.shared.setCard(Card(number: cardNumber, cvv: cvv))
-        popVC()
+//        User.shared.setCard(Card(number: cardNumber, cvv: cvv))
+//        popVC()
+        API.changeCard(cardNumber: cardNumber) { [weak self] error, ref in
+            guard let stongSelf = self else { return }
+            if error == nil {
+                stongSelf.popVC()
+            }
+        }
+    }
+    
+    //MARK:- Keyboard
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        buttonConstraint?.constant = (isBigPhone ? 50 + 8 : 16 + 16) - keyboardSize.cgRectValue.height
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+       
+    @objc func keyboardWillHide(_ notification: Notification) {
+        buttonConstraint?.constant = 0
+        let userInfo = notification.userInfo
+        let animationDuration = userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: animationDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func subscribeToShowKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
+    func deregisterFromKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.removeObserver(self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
     }
 }

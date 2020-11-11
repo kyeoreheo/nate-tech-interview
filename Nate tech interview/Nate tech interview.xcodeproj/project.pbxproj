@@ -60,6 +60,15 @@
 		31A653E22555A4FD006A5A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A653E02555A4FD006A5A19 /* LaunchScreen.storyboard */; };
 		31A653ED2555A4FD006A5A19 /* Nate_tech_interviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A653EC2555A4FD006A5A19 /* Nate_tech_interviewTests.swift */; };
 		31A653F82555A4FE006A5A19 /* Nate_tech_interviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A653F72555A4FE006A5A19 /* Nate_tech_interviewUITests.swift */; };
+		31C140C0255B122900EE31CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31C140BF255B122900EE31CF /* GoogleService-Info.plist */; };
+		31C140C1255B122900EE31CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31C140BF255B122900EE31CF /* GoogleService-Info.plist */; };
+		31C140C2255B122900EE31CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 31C140BF255B122900EE31CF /* GoogleService-Info.plist */; };
+		31C140E0255B139E00EE31CF /* API+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140DF255B139E00EE31CF /* API+Auth.swift */; };
+		31C140E9255B198000EE31CF /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140E8255B198000EE31CF /* LogInVC.swift */; };
+		31C140EE255B198900EE31CF /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140ED255B198900EE31CF /* SignUpVC.swift */; };
+		31C140F4255B19B800EE31CF /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140F3255B19B800EE31CF /* CustomView.swift */; };
+		31C140F9255B1C3100EE31CF /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C140F8255B1C3100EE31CF /* UILabel+.swift */; };
+		31C14101255B356F00EE31CF /* AuthenticationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C14100255B356F00EE31CF /* AuthenticationVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +136,13 @@
 		31A653F32555A4FE006A5A19 /* Nate tech interviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nate tech interviewUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31A653F72555A4FE006A5A19 /* Nate_tech_interviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nate_tech_interviewUITests.swift; sourceTree = "<group>"; };
 		31A653F92555A4FE006A5A19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31C140BF255B122900EE31CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		31C140DF255B139E00EE31CF /* API+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Auth.swift"; sourceTree = "<group>"; };
+		31C140E8255B198000EE31CF /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
+		31C140ED255B198900EE31CF /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		31C140F3255B19B800EE31CF /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		31C140F8255B1C3100EE31CF /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		31C14100255B356F00EE31CF /* AuthenticationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVM.swift; sourceTree = "<group>"; };
 		35ED44B484E802E005032118 /* Pods-Nate tech interview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nate tech interview.release.xcconfig"; path = "Target Support Files/Pods-Nate tech interview/Pods-Nate tech interview.release.xcconfig"; sourceTree = "<group>"; };
 		DF83BEAEBB7FF3A197B992EC /* Pods_Nate_tech_interview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nate_tech_interview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -185,6 +201,7 @@
 				31A653D72555A4FC006A5A19 /* SceneDelegate.swift */,
 				315C28EF255717E600D3B133 /* Fonts */,
 				31A653E32555A4FD006A5A19 /* Info.plist */,
+				31C140BF255B122900EE31CF /* GoogleService-Info.plist */,
 				31A653DB2555A4FC006A5A19 /* Main.storyboard */,
 				31A653E02555A4FD006A5A19 /* LaunchScreen.storyboard */,
 				31A653DE2555A4FD006A5A19 /* Assets.xcassets */,
@@ -217,10 +234,12 @@
 			children = (
 				31A4111E2555DF9E00BC0C02 /* UIColor+.swift */,
 				31A411232555DFD300BC0C02 /* UIViewController+.swift */,
+				31C140F8255B1C3100EE31CF /* UILabel+.swift */,
 				31A4113D2555E1C900BC0C02 /* UIImage+.swift */,
 				31A41176255629AA00BC0C02 /* UIFont+.swift */,
 				315C290D25575BF700D3B133 /* String+.swift */,
 				31A4117E25562A8500BC0C02 /* Global.swift */,
+				31C140F3255B19B800EE31CF /* CustomView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,6 +286,7 @@
 			children = (
 				31A411462555E7A300BC0C02 /* API.swift */,
 				31A4114E2555E7B600BC0C02 /* API+Products.swift */,
+				31C140DF255B139E00EE31CF /* API+Auth.swift */,
 				3132120B2559FEC700304A7E /* User.swift */,
 			);
 			path = API;
@@ -301,6 +321,7 @@
 				31A4111A2555DEC700BC0C02 /* Extensions */,
 				31A411452555E79400BC0C02 /* API */,
 				31A410EF2555A97F00BC0C02 /* Splash */,
+				31C140E7255B196900EE31CF /* Authentication */,
 				31A410F02555A98600BC0C02 /* MainTab */,
 			);
 			path = "Nate tech interview";
@@ -322,6 +343,16 @@
 				31A653F92555A4FE006A5A19 /* Info.plist */,
 			);
 			path = "Nate tech interviewUITests";
+			sourceTree = "<group>";
+		};
+		31C140E7255B196900EE31CF /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				31C14100255B356F00EE31CF /* AuthenticationVM.swift */,
+				31C140E8255B198000EE31CF /* LogInVC.swift */,
+				31C140ED255B198900EE31CF /* SignUpVC.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		639A8A88D4BC1F97D7AD7894 /* Frameworks */ = {
@@ -439,6 +470,7 @@
 			files = (
 				315C28F8255717F400D3B133 /* NotoSansCJKkr-Black.otf in Resources */,
 				315C28FB255717F400D3B133 /* NotoSansCJKkr-Regular.otf in Resources */,
+				31C140C0255B122900EE31CF /* GoogleService-Info.plist in Resources */,
 				315C28FE255717F400D3B133 /* BlackHanSans-Regular.ttf in Resources */,
 				31A653E22555A4FD006A5A19 /* LaunchScreen.storyboard in Resources */,
 				315C28F5255717F400D3B133 /* NotoSansCJKkr-Bold.otf in Resources */,
@@ -457,6 +489,7 @@
 				315C28F9255717F400D3B133 /* NotoSansCJKkr-Black.otf in Resources */,
 				315C28FC255717F400D3B133 /* NotoSansCJKkr-Regular.otf in Resources */,
 				315C28F6255717F400D3B133 /* NotoSansCJKkr-Bold.otf in Resources */,
+				31C140C1255B122900EE31CF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +502,7 @@
 				315C28FA255717F400D3B133 /* NotoSansCJKkr-Black.otf in Resources */,
 				315C28FD255717F400D3B133 /* NotoSansCJKkr-Regular.otf in Resources */,
 				315C28F7255717F400D3B133 /* NotoSansCJKkr-Bold.otf in Resources */,
+				31C140C2255B122900EE31CF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,10 +559,13 @@
 				31A41189255632A600BC0C02 /* ProductImage.swift in Sources */,
 				31A411242555DFD300BC0C02 /* UIViewController+.swift in Sources */,
 				31A41177255629AA00BC0C02 /* UIFont+.swift in Sources */,
+				31C14101255B356F00EE31CF /* AuthenticationVM.swift in Sources */,
 				31A4113E2555E1C900BC0C02 /* UIImage+.swift in Sources */,
+				31C140E0255B139E00EE31CF /* API+Auth.swift in Sources */,
 				315C294D25590EFA00D3B133 /* OrderHistoryCVC.swift in Sources */,
 				31A411162555DEBD00BC0C02 /* MainTabBarVM.swift in Sources */,
 				315C295B2559996300D3B133 /* OrderDetailVC.swift in Sources */,
+				31C140F4255B19B800EE31CF /* CustomView.swift in Sources */,
 				3132120C2559FEC700304A7E /* User.swift in Sources */,
 				315C295325590F0F00D3B133 /* OrderHistoryCell.swift in Sources */,
 				31A4110E2555DEAD00BC0C02 /* MainTabBar.swift in Sources */,
@@ -545,10 +582,13 @@
 				315C293C2558BD5000D3B133 /* ChangePhoneVC.swift in Sources */,
 				31A4116D2556184200BC0C02 /* ProductFeedCVC.swift in Sources */,
 				31A411472555E7A300BC0C02 /* API.swift in Sources */,
+				31C140EE255B198900EE31CF /* SignUpVC.swift in Sources */,
 				31A41172255618A300BC0C02 /* ProductCell.swift in Sources */,
+				31C140E9255B198000EE31CF /* LogInVC.swift in Sources */,
 				315C290E25575BF700D3B133 /* String+.swift in Sources */,
 				315C292F2558BCC700D3B133 /* ChangeAddressVC.swift in Sources */,
 				31A4111F2555DF9E00BC0C02 /* UIColor+.swift in Sources */,
+				31C140F9255B1C3100EE31CF /* UILabel+.swift in Sources */,
 				315C29372558BD4300D3B133 /* ChangeCardVC.swift in Sources */,
 				31A411682556175D00BC0C02 /* MyPageVM.swift in Sources */,
 			);

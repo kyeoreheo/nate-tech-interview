@@ -12,7 +12,7 @@ class HomeVC: UIViewController {
     // MARK:- View components
     private let titleLabel = UILabel()
     private let productFeedCVC = ProductFeedCVC()
-    private lazy var notificationView = MyPageVM(self).notificationView(text: "Successfully purchased an item!")
+    private lazy var notificationView = CustomView().notificationView(text: "Successfully purchased an item!")
 
     // MARK:- Properties
     private lazy var viewModel = HomeVM(self)
@@ -26,6 +26,10 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         configure()
         configureUI()
+        API.registerUser(user: AuthProperties(email: "91kyoheo@gmail.com", password: "123456", username: "Kyo")) { error, ref in
+            print("DEBUG:- \(ref), error \(error)")
+            
+        }
     }
     
     // MARK:- Configures
